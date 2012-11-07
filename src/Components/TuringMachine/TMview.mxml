@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:TuringMachine="Components.TuringMachine.*"
+		 creationComplete="onCreationComplete(event)" >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.controls.advancedDataGridClasses.AdvancedDataGridColumn;
+			import mx.events.AdvancedDataGridEvent;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			
+			import spark.components.TextInput;
+			import spark.events.ListEvent;
+			
+			public var commandsVector:Vector.<TMCommand>;
+			private var timer:Timer;
+			private var header:Array;
+			
+			private var currentTMState:String; 
+			
+			[Bindable]
+			private var commandsDataGroupDP:ArrayCollection;
+			
+			[Bindable]
+			private var headerDataGroupDP:ArrayCollection;
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				initializeComponent()
+			}
+			
+			protected function initializeComponent(event:Event = null):void
+			{
+				commandsVector = new Vector.<TMCommand>;
+				
+				executeBtn.visible = true;
+				stopBtn.visible = false;
+				
+				header = ["Начальное состояние","Cимвол на ленте", "Записываемый символ", "Действие", "Конечное состояние"];
+				
+				configureDataList();
+				configureTMLineController();
+				configureListeners();
+			}
+			
+			private function configureListeners():void
+			{
+				executeBtn.addEventListener(MouseEvent.CLICK, onExecuteBtnClick);
+				stopBtn.addEventListener(MouseEvent.CLICK, onStopBtnClick);
+			}
+			
+			private function configureTMLineController():void
+			{
+				line.configureInitialState(GlobalConstants.TURING_LINE_START_LENGHT);
+			}
+			
+			
+			protected function onExecuteBtnClick(event:MouseEvent):void
+			{
+				if(getCommandsFromDataProvider(commandsDataGroupDP)){
+					currentTMState = commandsVector[0].startState;
+					line.currentIndex = 1;
+					timer = new Timer(250, 100000);
+					timer.addEventListener(TimerEvent.TIMER, executeCodeByTimer);
+					timer.start();
+					
+					reverseBtnsVisible();
+				}
+			}
+			
+			private function parseCodeText(text:String):Boolean
+			{
+				text = text.replace(GlobalConstants.regExpForBreak, "");
+				
+				trace(text.search(GlobalConstants.regExpForSpace));
+				
+				var commandsArray:Array = text.split(";");
+				var commandStepsArray:Array = [];
+				var stringCommand:String;
+				
+				for (var i:int = 0; i < commandsArray.length; i++){
+					stringCommand = commandsArray[i]
+					commandStepsArray = stringCommand.split(",");
+					if(commandStepsArray.length != 5){
+						Alert.show("Неверный формат!", "Ошибка");
+						return false;
+					}
+					else{
+						commandsVector.push(new TMCommand(commandStepsArray[0], commandStepsArray[1],
+							commandStepsArray[2], commandStepsArray[3],
+							commandStepsArray[4]));
+					}
+				}
+				return true;
+			}
+			
+			private function getCommandsFromDataProvider(dataProvider:ArrayCollection):Boolean{
+				var command:TMCommand;
+				for (var i:int = 0; i < dataProvider.length; i++){
+					if(dataProvider[i] is TMCommand){
+						command = dataProvider[i] as TMCommand;
+						commandsVector.push(command);
+					}
+				}
+				return true;
+			}
+			
+			protected function executeCodeByTimer(event:TimerEvent):void{
+				var currentCommand:TMCommand;
+				currentCommand = findCommand(line.currentSymbol);
+				if(!currentCommand){
+					stopExecute();
+					return;
+				}
+				//write new symbol
+				line.writeSymbol(currentCommand.writeSymbol);
+				//do action
+				switch(currentCommand.action.toLowerCase()){
+					case "r":
+						line.stepRight();
+						break;
+					case "l":
+						line.stepLeft();
+						break;
+					case "n":
+						//do nothing...
+						break;
+					case "h":
+						stopExecute();
+						break;
+					default:
+						Alert.show("Неизвестная команда", "Ошибка");
+						stopExecute();
+						trace("Unknown command");
+						break;
+				}
+				//go to the next state
+				currentTMState = currentCommand.endState;
+			}
+			
+			
+			
+			
+			private function findCommand(currentSymbol:String):TMCommand{
+				for (var i:int = 0; i < commandsVector.length; i++) 
+				{
+					if(commandsVector[i].startState == currentTMState && commandsVector[i].readSymbol == currentSymbol)
+						return commandsVector[i];
+				}
+				Alert.show("Не найдена команда для символа '"+currentSymbol+"' и состояния '"+currentState+"'","Ошибка");
+				return null;
+			}
+			
+			
+			
+			private function stopExecute():void{
+				reverseBtnsVisible();
+				timer.removeEventListener(TimerEvent.TIMER, executeCodeByTimer);
+				timer.stop();
+			}
+			
+			
+			
+			protected function onStopBtnClick(event:MouseEvent):void{
+				stopExecute();
+			}
+			
+			
+			
+			protected function reverseBtnsVisible():void{
+				stopBtn.visible = !stopBtn.visible;
+				executeBtn.visible = !executeBtn.visible;
+			}
+			
+			
+			
+			private function configureDataList():void{
+				headerDataGroupDP = new ArrayCollection();
+				commandsDataGroupDP = new ArrayCollection();
+				
+				headerDataGroupDP.addItem(new TMCommand("Начальное состояние","Читаемый символ","Символ для записи","Действие","Конечное состояние"));
+				headerDataGroup.itemRenderer = new ClassFactory(TMHeaderRenderer);
+				headerDataGroup.dataProvider = headerDataGroupDP;
+				
+				for (var i:int = 0; i < 30; i++){
+					commandsDataGroupDP.addItem(new TMCommand("","","","",""));
+				} 
+				commandsDataGroup.itemRendererFunction = rendererFactory;
+				commandsDataGroup.dataProvider = commandsDataGroupDP;
+			}
+			
+			
+			
+			protected function rendererFactory(item:Object):ClassFactory{
+				var rendererFactory:ClassFactory;
+				if(item is TMCommand){
+					rendererFactory = new ClassFactory(TMCommandRenderer);
+				}
+				else{
+					rendererFactory = new ClassFactory(TMHeaderRenderer);
+				}
+				
+				return rendererFactory;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout gap="10"/>
+	</s:layout>
+	
+	
+	<TuringMachine:TMLineController id="line" width="100%"/>
+	<!--<s:RichEditableText id="codeText" restrict="a-zA-Z0-1_,;"
+						columnCount="6" columnGap="20" 
+						width="100%" height="10%" 
+						text="0,1,1,r,0;" visible="false"/>-->
+	<s:HGroup width="100%" height="100%">
+		<s:VGroup height="100%">
+			<s:DataGroup id="headerDataGroup" width="100%"/>
+			<s:Scroller id="commandsDataGroupScroller" width="100%" height="100%">
+				<s:DataGroup id="commandsDataGroup" width="100%" height="100%"  >
+					<s:layout>
+						<s:VerticalLayout paddingTop="2" paddingBottom="2"/>
+					</s:layout>
+				</s:DataGroup>
+			</s:Scroller>
+		</s:VGroup>
+		
+		<s:RichEditableText height="100%" fontSize="16" >
+			Описание алгоритма составления про граммы...
+		</s:RichEditableText>
+	
+	</s:HGroup>
+	
+	<s:Group id="btnGroup" left="0">
+		<s:Button id="executeBtn" label="Выполнить" width="150"/>
+		<s:Button id="stopBtn" label="Стоп" width="150"/>
+	</s:Group>
+	
+	
+</s:Group>

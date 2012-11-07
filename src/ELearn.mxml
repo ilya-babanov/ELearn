@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:Components="Components.*"
+			   width="1024"
+			   height="650"
+			   frameRate="45"
+			   applicationComplete="onAppComplete(event)" xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*" xmlns:TuringMachine="Components.TuringMachine.*" 
+			   >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Metadata>
+		[ResourceBundle("Global")]
+	</fx:Metadata>
+	
+	
+	<fx:Style source="MainCSS.css"/>
+	
+	<fx:Script>
+		<![CDATA[
+			import Components.ContentPages.FinalTestCP;
+			import Components.ContentPages.IntroCP;
+			import Components.ContentPages.StatisticsCP;
+			import Components.ContentPages.StrongCP;
+			import Components.ContentPages.TuringChurchCP;
+			
+			import com.greensock.TweenLite;
+			
+			import mx.core.IVisualElement;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			
+			
+			private const RESOURCE_BUNDLE:String = "Global";
+			
+			private var menuOpen:Boolean = false;
+			
+			private var _currentContentPage:UIComponent;
+			/* private var introCP:IntroCP;
+			private var turingChurchCP:TuringChurchCP;
+			private var strongCP:StrongCP;
+			private var finalTestCP:FinalTestCP;
+			private var statisticsCP:StatisticsCP; */
+			
+			public function get currentContentPage():UIComponent{
+				return _currentContentPage;
+			}
+
+			public function set currentContentPage(value:UIComponent):void{
+				_currentContentPage = value;
+				headerMenu.currentContentPage = value;
+			}
+
+			protected function onAppComplete(event:FlexEvent):void{
+				configureContentPages();
+				configureListeners();
+				configureRegistrationPanel();
+			}
+			
+			private function configureContentPages():void{
+			/* 	introCP = new IntroCP();
+				turingChurchCP = new TuringChurchCP();
+				strongCP = new StrongCP();
+				finalTestCP = new FinalTestCP();
+				statisticsCP = new StatisticsCP(); */
+				
+				//contentPagesGroup.addElement(introCP);
+				introCP.visible = true;
+				introCP.alpha = 1;
+				currentContentPage = introCP;
+			}
+			
+			
+			private function configureListeners():void{
+				openMenuBtn.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
+				
+				leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
+				leftMenu.addEventListener(GlobalConstants.TURING_CHURCH_EVENT, onLeftMenuEvent);
+				leftMenu.addEventListener(GlobalConstants.INFORMAL_EVENT, onLeftMenuEvent);
+				leftMenu.addEventListener(GlobalConstants.STRONG_EVENT, onLeftMenuEvent);
+				leftMenu.addEventListener(GlobalConstants.FINAL_TEST_EVENT, onLeftMenuEvent);
+				leftMenu.addEventListener(GlobalConstants.STATISTICS_EVENT, onLeftMenuEvent);
+			}
+			
+			protected function onOpenMenuClick(event:MouseEvent):void{
+				mainGroup.includeInLayout = false;
+				if(menuOpen){
+					contentPagesGroup.removeEventListener(MouseEvent.CLICK, onOpenMenuClick);
+					TweenLite.to(mainGroup,0.3,{x:0, onComplete:includeMainGroupInLayout});
+				}
+				else{
+					contentPagesGroup.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
+					TweenLite.to(mainGroup,0.3,{x:leftMenu.width});
+				}
+				menuOpen = !menuOpen;
+			}
+			
+			private function includeMainGroupInLayout():void{
+				mainGroup.includeInLayout = true;
+			}
+			
+			protected function onLeftMenuEvent(event:Event):void{
+				switch(event.type)
+				{
+					case GlobalConstants.INTRODUCTION_EVENT:
+						if(!(currentContentPage is IntroCP)){
+							removeContentPage(currentContentPage);
+							addNewContentPage(introCP);
+							headerMenu.setDefaultProperties();
+						}
+						break;
+					case GlobalConstants.TURING_CHURCH_EVENT:
+						if(!(currentContentPage is TuringChurchCP)){
+							removeContentPage(currentContentPage);
+							addNewContentPage(turingChurchCP);
+							headerMenu.setDefaultProperties();
+						}
+						break;
+					/* case GlobalConstants.INFORMAL_EVENT:
+						if(!(currentContentPage is InformalCP)){
+							removeContentPage(currentContentPage);
+							addNewContentPage(informalCP);
+						}
+						break; */
+					case GlobalConstants.STRONG_EVENT:
+						if(!(currentContentPage is StrongCP)){
+							removeContentPage(currentContentPage);
+							addNewContentPage(strongCP);
+							headerMenu.setDefaultProperties();
+						}
+						break;
+					case GlobalConstants.FINAL_TEST_EVENT:
+						if(!(currentContentPage is FinalTestCP)){
+							removeContentPage(currentContentPage);
+							addNewContentPage(finalTestCP);
+							headerMenu.setDefaultProperties();
+						}
+						break;
+					case GlobalConstants.STATISTICS_EVENT:
+						if(!(currentContentPage is StatisticsCP)){
+							removeContentPage(currentContentPage);
+							addNewContentPage(statisticsCP);
+							headerMenu.setDefaultProperties();
+						}
+						break;
+					default:
+						break;
+				}
+			}
+			
+			private function removeContentPage(contentPage:UIComponent):void{
+				contentPage.includeInLayout = false;
+				TweenLite.to(contentPage, 0.2, {alpha: 0, onComplete: removePageFromStage, onCompleteParams: [contentPage]}); 
+			}
+			
+			private function addNewContentPage(newContentPage:UIComponent):void{
+				//contentPagesGroup.addElement(newContentPage);
+				newContentPage.y = 30;
+				newContentPage.x = 0;
+				newContentPage.alpha = 0;
+				newContentPage.visible = true;
+				TweenLite.to(newContentPage,0.4,{y: 0, alpha: 1});
+				currentContentPage = newContentPage;
+			}
+			
+			private function removePageFromStage(contentPage:UIComponent):void{
+				//contentPagesGroup.removeElement(contentPage);
+				contentPage.visible = false;
+			}
+			
+			private function configureRegistrationPanel():void
+			{
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<!--
+	<s:states>
+		<s:State name="IntroCP"/>
+		<s:State name="TuringChurchCP"/>
+		<s:State name="StrongCP"/>
+		<s:State name="FinalTestCP"/>
+		<s:State name="StatisticsCP"/>
+	</s:states>
+	-->
+	
+	<s:layout>
+		<s:VerticalLayout gap="0" />
+	</s:layout>
+	
+	<Menus:HeaderMenu id="headerMenu" width="100%"/>
+	
+		
+	<s:Group id="mainGroup" height="100%" width="100%" x="0">
+		<s:Group id="contentPagesGroup" width="100%" height="100%" top="20" bottom="30" left="80">
+			<ContentPages:IntroCP id="introCP"  alpha="0" height="100%" width="100%" visible="false"/>
+			<ContentPages:TuringChurchCP id="turingChurchCP" height="100%" width="100%" alpha="0" visible="false"/>
+			<!--<ContentPages:InformalCP id="informalCP" height="100%" width="100%" alpha="0" visible="false"/>-->
+			<ContentPages:StrongCP id="strongCP"  alpha="0" height="100%" width="100%" visible="false"/>
+			<ContentPages:FinalTestCP id="finalTestCP"  alpha="0" height="100%" width="100%"  visible="false"/>
+			<ContentPages:StatisticsCP id="statisticsCP"  alpha="0" height="100%" width="100%" visible="false"/>
+		</s:Group>
+			
+		<s:HGroup x="{-leftMenu.width}" gap="0" height="100%">
+			<Menus:LeftMenu id="leftMenu" top="20" width="{GlobalConstants.LEFT_MENU_WIDTH}" height="100%"/>
+			<s:Button id="openMenuBtn" width="35" height="100%" alpha=".4"/>	
+		</s:HGroup>
+		
+	</s:Group>
+	
+	
+	
+</s:Application>

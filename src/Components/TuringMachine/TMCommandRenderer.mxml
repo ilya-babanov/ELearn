@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	
+	
+	<s:HGroup gap="5" width="100%" paddingLeft="5" paddingRight="5">
+		<s:TextInput text="@{data.startState}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}"/>
+		<s:TextInput text="@{data.readSymbol}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}"/>
+		<s:TextInput text="@{data.writeSymbol}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}"/>
+		<s:TextInput text="@{data.action}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}"/>
+		<s:TextInput text="@{data.endState}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}"/>
+	</s:HGroup>
+	
+</s:ItemRenderer>

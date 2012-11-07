@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  creationComplete="onCreationComplete(event)">
+	
+	<fx:Metadata>
+		[ResourceBundle(TableOfContents)]
+	</fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.greensock.TweenLite;
+			
+			import flash.sampler.NewObjectSample;
+			
+			import mx.events.FlexEvent;
+			
+			private const RESOURCE_BUNDLE:String = "TableOfContents";
+			private var pressedButton:Button;
+			
+			protected function onCreationComplete(event:FlexEvent):void{
+				configureButtons();
+			}
+			
+			private function configureButtons():void{
+				introductionBtn.addEventListener(MouseEvent.CLICK, onIntroductionBtn);
+				turingChurchBtn.addEventListener(MouseEvent.CLICK, onTuringChurchBtn);
+				//informalBtn.addEventListener(MouseEvent.CLICK, onInformalBtn);
+				strongBtn.addEventListener(MouseEvent.CLICK, onStrongBtn);
+				finalTestBtn.addEventListener(MouseEvent.CLICK, onFinalTestBtn);
+				statisticsBtn.addEventListener(MouseEvent.CLICK, onStatisticsBtn);
+			}
+			
+			protected function onIntroductionBtn(event:MouseEvent):void{
+				pressedButton = introductionBtn;
+				var e:Event = new Event(GlobalConstants.INTRODUCTION_EVENT);
+				dispatchEvent(e);
+				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
+			}
+			protected function onTuringChurchBtn(event:MouseEvent):void{
+				pressedButton = turingChurchBtn;
+				var e:Event = new Event(GlobalConstants.TURING_CHURCH_EVENT);
+				dispatchEvent(e);
+				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
+			}
+			protected function onInformalBtn(event:MouseEvent):void{
+				//pressedButton = 
+				var e:Event = new Event(GlobalConstants.INFORMAL_EVENT);
+				dispatchEvent(e);
+			}
+			protected function onStrongBtn(event:MouseEvent):void{
+				pressedButton = strongBtn;
+				var e:Event = new Event(GlobalConstants.STRONG_EVENT);
+				dispatchEvent(e);
+				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
+			}
+			protected function onFinalTestBtn(event:MouseEvent):void{
+				pressedButton = finalTestBtn;
+				var e:Event = new Event(GlobalConstants.FINAL_TEST_EVENT);
+				dispatchEvent(e);
+				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
+			}
+			protected function onStatisticsBtn(event:MouseEvent):void{
+				pressedButton = statisticsBtn;
+				var e:Event = new Event(GlobalConstants.STATISTICS_EVENT);
+				dispatchEvent(e);
+				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="#efefef"/>
+		</s:fill>
+	</s:Rect>
+	<s:HGroup width="100%" height="100%">
+		<s:VGroup id="buttonGroup" width="100%" height="100%" 
+				  gap="2" horizontalAlign="justify" >
+			<s:Button id="introductionBtn" label="{resourceManager.getString(RESOURCE_BUNDLE, GlobalConstants.INTRODUCTION_EVENT)}" />
+			<s:Button id="turingChurchBtn" label="{resourceManager.getString(RESOURCE_BUNDLE, GlobalConstants.TURING_CHURCH_EVENT)}" />
+			<!--<s:Button id="informalBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants...)}" />-->
+			<s:Button id="strongBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.STRONG_EVENT)}" />
+			<s:Button id="finalTestBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.FINAL_TEST_EVENT)}" />
+			<s:Button id="statisticsBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.STATISTICS_EVENT)}" />
+			<s:Ellipse id="dot" width="10" height="10" includeInLayout="false"
+					   x="{introductionBtn.x + introductionBtn.width - 20}" y="{introductionBtn.y + (introductionBtn.height>>1) - (dot.height>>1)}">
+				<s:fill>
+					<s:SolidColor color="#FFFF00"/>
+				</s:fill>
+				<s:filters>
+					<s:BlurFilter blurX="5" blurY="5"/>
+				</s:filters>
+			</s:Ellipse>
+			
+		</s:VGroup>
+	</s:HGroup>
+</s:SkinnableContainer>
