@@ -6,6 +6,32 @@
 @namespace ContentPages "Components.ContentPages.*";
 @namespace Menus "Components.Menus.*";
 @namespace TuringMachine "Components.TuringMachine.*";
+@namespace Registration "Registration.*";
+
+
+/*--------------------     Registration    -----------------------------*/
+Registration|RegistrationWindow{
+	backgroundColor: #eeeeee;	
+}
+
+#headerField{
+	textAlign: center;	
+	fontSize: 22;
+}
+
+Registration|RegistrationWindow s|TextInput{
+	fontSize: 18;
+}
+
+Registration|RegistrationWindow s|Button{
+	skinClass: ClassReference("Skins.ButtonGreenSkin");
+}
+
+Registration|RegistrationWindow s|Button s|Label{
+	fontSize: 16;	
+}
+
+
 
 
 
@@ -34,7 +60,7 @@ Menus|LeftMenu s|Button s|Label{
 }
 
 #openMenuBtn{
-	skinClass: ClassReference("Skins.ButtonGreenSkin");
+	skinClass: ClassReference("Skins.ButtonBlueSkin");
 }
 
 

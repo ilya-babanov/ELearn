@@ -22,15 +22,15 @@
 	
 	<s:transitions>
 		<s:Transition fromState="up" toState="over" autoReverse="true">
-			<s:Parallel duration="70">
+			<s:Parallel duration="50">
 				<s:AnimateColor target="{color}" />
 			</s:Parallel>
 		</s:Transition>
 	</s:transitions>
 	
-	<s:Rect id="rect" top="0" left="0" right="0" bottom="0" height="50">
+	<s:Rect id="rect" top="0" left="0" right="0" bottom="0" height="35">
 		<s:fill >
-			<s:SolidColor id="color" color.up="#7fc7ff" color.over="#889acd" color.down="#eeeeee"/>
+			<s:SolidColor id="color" color.up="#7fc7ff" color.over="#889acd" color.down="#eeeeee" color.disabled="#eeeeee"/>
 		</s:fill>
 	</s:Rect>
 	<s:Label id="labelDisplay"

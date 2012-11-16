@@ -76,19 +76,18 @@
 		]]>
 	</fx:Script>
 	<s:layout>
-		<s:HorizontalLayout horizontalAlign="left" verticalAlign="middle"/>
+		<s:HorizontalLayout horizontalAlign="left" verticalAlign="top"/>
 	</s:layout>
 	<s:Group width="50%" height="100%">
 		<s:Rect top="0" left="0" right="0" bottom="0">
 			<s:fill>
-				<s:SolidColor color="#bfe9ff"/>
+				<s:SolidColor color="#eeeeee"/>
 			</s:fill>
 		</s:Rect>
 		<s:Label id="titleText" horizontalCenter="0"
 				 text="{resourceManager.getString(RESOURCE_BUNDLE, 'Header')}" 
 				 verticalCenter="0"/>
 	</s:Group>
-	<s:Spacer width="20"/>
 	<s:Button id="btnTheory" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Theory')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
 	<s:Button id="btnPractice" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Practice')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
 	<s:Button id="btnExercises" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Exercises')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>

@@ -88,13 +88,13 @@
 			<s:Button id="strongBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.STRONG_EVENT)}" />
 			<s:Button id="finalTestBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.FINAL_TEST_EVENT)}" />
 			<s:Button id="statisticsBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.STATISTICS_EVENT)}" />
-			<s:Ellipse id="dot" width="10" height="10" includeInLayout="false"
+			<s:Ellipse id="dot" width="12" height="12" includeInLayout="false"
 					   x="{introductionBtn.x + introductionBtn.width - 20}" y="{introductionBtn.y + (introductionBtn.height>>1) - (dot.height>>1)}">
 				<s:fill>
-					<s:SolidColor color="#FFFF00"/>
+					<s:SolidColor color="#6ea5ff"/>
 				</s:fill>
 				<s:filters>
-					<s:BlurFilter blurX="5" blurY="5"/>
+					<s:BlurFilter blurX="2" blurY="2"/>
 				</s:filters>
 			</s:Ellipse>
 			

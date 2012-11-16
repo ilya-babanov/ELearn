@@ -3,10 +3,12 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:Components="Components.*"
+			   xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*" 
+			   xmlns:TuringMachine="Components.TuringMachine.*" xmlns:Registration="Registration.*"
 			   width="1024"
 			   height="650"
 			   frameRate="45"
-			   applicationComplete="onAppComplete(event)" xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*" xmlns:TuringMachine="Components.TuringMachine.*" 
+			   applicationComplete="onAppComplete(event)"  
 			   >
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
@@ -77,6 +79,7 @@
 			
 			private function configureListeners():void{
 				openMenuBtn.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
+				registrationWindow.submitButton.addEventListener(MouseEvent.CLICK, onRegistartionSubmitBtnClick);
 				
 				leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
 				leftMenu.addEventListener(GlobalConstants.TURING_CHURCH_EVENT, onLeftMenuEvent);
@@ -177,6 +180,17 @@
 				
 			}
 			
+			protected function onRegistartionSubmitBtnClick(event:MouseEvent):void
+			{
+				TweenLite.to(registrationWindow, 0.5, {x: -registrationWindow.width, onComplete: deleteRegistrationWindow});
+				mainGroup.includeInLayout = false;
+				TweenLite.fromTo(mainGroup, 0.5, {x:this.width},{x:0});
+			}
+			
+			protected function deleteRegistrationWindow():void{
+				this.removeElement(registrationWindow);
+				mainGroup.includeInLayout = true;
+			}
 		]]>
 	</fx:Script>
 	
@@ -194,9 +208,9 @@
 		<s:VerticalLayout gap="0" />
 	</s:layout>
 	
+	
 	<Menus:HeaderMenu id="headerMenu" width="100%"/>
 	
-		
 	<s:Group id="mainGroup" height="100%" width="100%" x="0">
 		<s:Group id="contentPagesGroup" width="100%" height="100%" top="20" bottom="30" left="80">
 			<ContentPages:IntroCP id="introCP"  alpha="0" height="100%" width="100%" visible="false"/>
@@ -209,11 +223,12 @@
 			
 		<s:HGroup x="{-leftMenu.width}" gap="0" height="100%">
 			<Menus:LeftMenu id="leftMenu" top="20" width="{GlobalConstants.LEFT_MENU_WIDTH}" height="100%"/>
-			<s:Button id="openMenuBtn" width="35" height="100%" alpha=".4"/>	
+			<s:Button id="openMenuBtn" width="35" height="100%"/>	
 		</s:HGroup>
 		
 	</s:Group>
 	
 	
+	<Registration:RegistrationWindow id="registrationWindow" height="100%" width="100%" x="0" y="0" includeInLayout="false"/>
 	
 </s:Application>

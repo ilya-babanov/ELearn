@@ -29,9 +29,9 @@
 		</s:Transition>
 	</s:transitions>
 	
-	<s:Rect id="rect" top="1" left="1" right="1" bottom="1" height="50">
+	<s:Rect id="rect" top="0" left="0" right="0" bottom="0" height="30">
 		<s:fill > 
-			<s:SolidColor id="color" color.up="#7fc7ff" color.over="#1e90ff" color.down="#bfe9ff" />
+			<s:SolidColor id="color" color.up="#dddddd" color.over="#7fc7ff" color.down="#bfe9ff" />
 		</s:fill>
 		<s:filters>
 			<s:GlowFilter id="glow" blurX="7" blurY="7" 

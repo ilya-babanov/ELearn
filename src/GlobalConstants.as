@@ -19,7 +19,7 @@ package
 		
 		
 		//Header Menu
-		public static const HEADER_MENU_HEIGHT:int = 50;
+		public static const HEADER_MENU_HEIGHT:int = 40;
 		public static const HEADER_MENU_BUTTON_WIDTH:int = 120;
 		
 		public static const regExpForBreak:RegExp = /\n/g;

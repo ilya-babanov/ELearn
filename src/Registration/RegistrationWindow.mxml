@@ -10,5 +10,11 @@
 	</fx:Declarations>
 	
 	
+	<s:VGroup id="form" width="60%" height="60%"  verticalCenter="0" horizontalCenter="0" horizontalAlign="center" gap="20">
+		<s:Label id="headerField" text="Обучающий курс по машинам Тьюринга" width="100%"/>
+		<s:TextInput id="nameField" prompt="Ваше имя" width="60%" />
+		<s:TextInput id="passwordField" prompt="Пароль" width="60%" displayAsPassword="true"/>
+		<s:Button id="submitButton" label="Вход" width="60%"/>
+	</s:VGroup>
 	
 </s:SkinnableContainer>
