@@ -6,6 +6,32 @@
 @namespace ContentPages "Components.ContentPages.*";
 @namespace Menus "Components.Menus.*";
 @namespace TuringMachine "Components.TuringMachine.*";
+@namespace Registration "Registration.*";
+
+
+/*--------------------     Registration    -----------------------------*/
+Registration|RegistrationWindow{
+	backgroundColor: #eeeeee;	
+}
+
+#headerField{
+	textAlign: center;	
+	fontSize: 22;
+}
+
+Registration|RegistrationWindow s|TextInput{
+	fontSize: 18;
+}
+
+Registration|RegistrationWindow s|Button{
+	skinClass: ClassReference("Skins.ButtonBlueSkin");
+}
+
+Registration|RegistrationWindow s|Button s|Label{
+	fontSize: 16;	
+}
+
+
 
 
 
@@ -21,11 +47,11 @@ Menus|HeaderMenu s|Button s|Label{
 	fontSize: 12;
 }
 Menus|HeaderMenu s|Button{
-	skinClass: ClassReference("Skins.ButtonGreenSkin");
+	skinClass: ClassReference("Skins.ButtonBlueSkin");
 }
 
 Menus|LeftMenu s|Button{
-	skinClass: ClassReference("Skins.ButtonBlueSkin");
+	skinClass: ClassReference("Skins.ButtonGreySkin");
 }
 
 Menus|LeftMenu s|Button s|Label{
@@ -34,7 +60,7 @@ Menus|LeftMenu s|Button s|Label{
 }
 
 #openMenuBtn{
-	skinClass: ClassReference("Skins.ButtonGreenSkin");
+	skinClass: ClassReference("Skins.ButtonGreySkin");
 }
 
 
@@ -79,17 +105,17 @@ TuringMachine|TMview s|RichEditableText{
 TuringMachine|TMLineController s|TextInput{
 	textAlign: center;
 	fontSize: 17;
-	skinClass: ClassReference("Skins.TextBoxSkin");
+	skinClass: ClassReference("Skins.TMLineTextInputSkin");
 }
-
-TuringMachine|TMview s|Button{
-	skinClass: ClassReference("Skins.ButtonGreenSkin");	
+#commandsDataGroup s|TextInput{
+	skinClass: ClassReference("Skins.TMCommandTextInputSkin");
 }
 
 TuringMachine|TMHeaderRenderer s|RichText{
 	backgroundColor: #dceeff;
-	fontSize: 15;
+	fontSize: 12;
 	fontStyle: normal;
+	textAlign: center;
 }
 
 TuringMachine|TMCommandRenderer s|TextInput{
@@ -97,6 +123,29 @@ TuringMachine|TMCommandRenderer s|TextInput{
 	fontSize: 17;
 	textAlign: center;
 }
+
+
+
+
+/*--------------------   Other   -----------------------------*/
+
+s|VScrollBar{
+	skinClass: ClassReference("Skins.VscrollbarSkin");	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

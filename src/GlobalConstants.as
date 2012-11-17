@@ -15,8 +15,9 @@ package
 		public static const TM_ACTION:String = "action";
 		public static const TM_END_STATE:String = "endState";
 		
-		public static const TM_COMMAND_RENDERER_FIELD_WIDTH:Number = 100;
+		public static const TM_COMMAND_RENDERER_FIELD_WIDTH:Number = 80;
 		
+		public static const TM_ADD_ROW_EVENT:String = "AddNewRow";
 		
 		//Header Menu
 		public static const HEADER_MENU_HEIGHT:int = 40;

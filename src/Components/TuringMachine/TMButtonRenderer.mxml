@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" width="100%">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import Skins.ButtonGreySkin;
+			
+			import mx.core.IVisualElement;
+			
+			import spark.components.Button;
+			
+			override public function set data(value:Object):void{
+				if(value is Button){
+					if(contentGroup.numChildren == 0){
+						contentGroup.addElement(value as IVisualElement);
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:VGroup id="contentGroup" width="60%" horizontalAlign="contentJustify" verticalCenter="0" horizontalCenter="0">
+		
+	</s:VGroup>
+	
+</s:ItemRenderer>

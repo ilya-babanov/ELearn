@@ -28,9 +28,9 @@
 		</s:Transition>
 	</s:transitions>
 	
-	<s:Rect id="rect" top="0" left="0" right="0" bottom="0" height="35">
+	<s:Rect id="rect" top="0" left="0" right="0" bottom="0" height="20">
 		<s:fill >
-			<s:SolidColor id="color" color.up="#7fc7ff" color.over="#889acd" color.down="#eeeeee" color.disabled="#eeeeee"/>
+			<s:SolidColor id="color" color.up="#eeeeee" color.over="#889acd" color.down="#eeeeee" color.disabled="#eeeeee"/>
 		</s:fill>
 	</s:Rect>
 	<s:Label id="labelDisplay"
@@ -42,4 +42,3 @@
 	</s:Label>
 	
 </s:SparkButtonSkin>
-
