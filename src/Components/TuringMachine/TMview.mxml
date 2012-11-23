@@ -194,7 +194,7 @@
 				headerDataGroup.itemRenderer = new ClassFactory(TMHeaderRenderer);
 				headerDataGroup.dataProvider = headerDataGroupDP;
 				
-				for (var i:int = 0; i < 8; i++){
+				for (var i:int = 0; i < 5; i++){
 					commandsDataGroupDP.addItem(new TMCommand("","","","",""));
 				} 
 				var addRowButton:Button = new Button();
@@ -253,12 +253,12 @@
 						<s:VerticalLayout paddingTop="2" paddingBottom="2"/>
 					</s:layout>
 				</s:DataGroup>
-				<s:VScrollBar id="commandsDataGroupScroller" height="100%" viewport="{commandsDataGroup}"/>
+				<s:VScrollBar id="commandsDataGroupScroller" height="100%" viewport="{commandsDataGroup}" />
 			</s:HGroup>
 		</s:VGroup>
 		
 		<s:RichEditableText height="100%" fontSize="16" >
-			Описание алгоритма составления про граммы...
+			Описание алгоритма составления программы...
 		</s:RichEditableText>
 		
 	</s:HGroup>

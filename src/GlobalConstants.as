@@ -20,7 +20,7 @@ package
 		public static const TM_ADD_ROW_EVENT:String = "AddNewRow";
 		
 		//Header Menu
-		public static const HEADER_MENU_HEIGHT:int = 40;
+		public static const HEADER_MENU_HEIGHT:int = 35;
 		public static const HEADER_MENU_BUTTON_WIDTH:int = 120;
 		
 		public static const regExpForBreak:RegExp = /\n/g;

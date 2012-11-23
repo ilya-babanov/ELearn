@@ -93,10 +93,11 @@
 	<s:Button id="btnExercises" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Exercises')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
 	<s:Button id="btnControl" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Control')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
 	
-	<s:Line id="line" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}" x="{btnTheory.x}" y="{btnTheory.y + btnTheory.height + 4}" includeInLayout="false">
+	<s:Line id="line" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}" x="{btnTheory.x}" y="{btnTheory.y + btnTheory.height + 2}" includeInLayout="false">
 		<s:stroke>
-			<s:SolidColorStroke color="#FF0000" weight="3"/>
+			<s:SolidColorStroke color="#FF2222" weight="3"/>
 		</s:stroke>
 	</s:Line>
+	
 	
 </s:SkinnableContainer>
