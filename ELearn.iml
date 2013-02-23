@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="ELearn">
+    <configurations>
+      <configuration name="ELearn" main-class="ELearn" output-file="ELearn.swf" output-folder="$MODULE_DIR$/bin-debug" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
+        <dependencies target-player="11.4">
+          <entries>
+            <entry library-id="a2d095f1-9b5d-46c9-8682-60e51313139f">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="df12b8ff-8741-4a85-b7a7-2592e577556b">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="Apache Flex" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.locale" value="ru_RU" />
+          </map>
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/locale/ru_RU" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Apache Flex" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="a2d095f1-9b5d-46c9-8682-60e51313139f" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="df12b8ff-8741-4a85-b7a7-2592e577556b" />
+        <CLASSES>
+          <root url="jar://$DOCUMENTS$/Extensions/greensock-v12-as3/greensock-v12-as3/greensock.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
+

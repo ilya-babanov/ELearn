@@ -1,100 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-					  xmlns:s="library://ns.adobe.com/flex/spark" 
-					  xmlns:mx="library://ns.adobe.com/flex/mx"
-					  creationComplete="onCreationComplete(event)" xmlns:TuringMachine="Components.TuringMachine.*">
-	<fx:Script>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+                      xmlns:s="library://ns.adobe.com/flex/spark"
+                      xmlns:mx="library://ns.adobe.com/flex/mx"
+                      creationComplete="onCreationComplete(event)" xmlns:TuringMachine="Components.TuringMachine.*">
+    <fx:Script>
 		<![CDATA[
-			import Components.ResultHeaderRenderer;
-			import Components.ResultRenderer;
-			
-			import mx.collections.ArrayCollection;
-			import mx.events.FlexEvent;
-			
-			public var gridDataPovider:Array;
-			//public var gridItem:
-			private var headerDataGroupDP:ArrayCollection;
-			private var dataGroupDP:ArrayCollection;
-			
-			protected function onCreationComplete(event:FlexEvent):void
-			{
-				addEventListener("Theory", onTheoryEvent);
-				addEventListener("Practice", onPracticeEvent);
-				addEventListener("Exercises", onExercisesEvent);
-				addEventListener("Control", onControlEvent);
-				configureGrid();
-			}
-			
-			protected function onTheoryEvent(event:Event):void
-			{
-				currentState = "theory";
-			}
-			
-			protected function onPracticeEvent(event:Event):void
-			{
-				currentState = "practice";
-			}
-			
-			protected function onExercisesEvent(event:Event):void
-			{
-				currentState = "exercises";
-			}
-			
-			protected function onControlEvent(event:Event):void
-			{
-				currentState = "control";
-			}
-			
-			private function configureGrid():void
-			{
-				headerDataGroupDP = new ArrayCollection();
-				dataGroupDP = new ArrayCollection();
-				
-				headerDataGroupDP.addItem(new RegLine("Задание","Статус","Ответ пользователя","Оценка"));
-				headerDataGroup.itemRenderer = new ClassFactory(ResultHeaderRenderer);
-				headerDataGroup.dataProvider = headerDataGroupDP;
-				
-				for (var i:int = 0; i < 6; i++){
-					dataGroupDP.addItem(new RegLine("Задание №"+String(i+1),"Не выплнено","",""));
-				} 
-				dataGroup.itemRenderer = new ClassFactory(ResultRenderer);
-				dataGroup.dataProvider = dataGroupDP;
-			}
-			
-		]]>
+        import Components.RegLine;
+        import Components.ResultHeaderRenderer;
+        import Components.ResultRenderer;
+
+        import mx.collections.ArrayCollection;
+        import mx.events.FlexEvent;
+
+        public var gridDataProvider:Array;
+
+        //public var gridItem:
+        private var headerDataGroupDP:ArrayCollection;
+        private var dataGroupDP:ArrayCollection;
+
+        protected function onCreationComplete(event:FlexEvent):void {
+            addEventListener("Theory", onTheoryEvent);
+            addEventListener("Practice", onPracticeEvent);
+            addEventListener("Exercises", onExercisesEvent);
+            addEventListener("Control", onControlEvent);
+            configureGrid();
+        }
+
+        protected function onTheoryEvent(event:Event):void {
+            currentState = "theory";
+        }
+
+        protected function onPracticeEvent(event:Event):void {
+            currentState = "practice";
+        }
+
+        protected function onExercisesEvent(event:Event):void {
+            currentState = "exercises";
+        }
+
+        protected function onControlEvent(event:Event):void {
+            currentState = "control";
+        }
+
+        private function configureGrid():void {
+            headerDataGroupDP = new ArrayCollection();
+            dataGroupDP = new ArrayCollection();
+
+            headerDataGroupDP.addItem(new RegLine("Задание", "Статус", "Ответ пользователя", "Оценка"));
+            headerDataGroup.itemRenderer = new ClassFactory(ResultHeaderRenderer);
+            headerDataGroup.dataProvider = headerDataGroupDP;
+
+            for (var i:int = 0; i < 6; i++) {
+                dataGroupDP.addItem(new RegLine("Задание №" + String(i + 1), "Не выплнено", "", ""));
+            }
+            dataGroup.itemRenderer = new ClassFactory(ResultRenderer);
+            dataGroup.dataProvider = dataGroupDP;
+        }
+        ]]>
 	</fx:Script>
-	<fx:Declarations>
-		<s:Power id="expo" exponent="8"/>
-	</fx:Declarations>
-	
-	
-	<s:states>
-		<s:State name="theory"/>
-		<s:State name="practice"/>
-		<s:State name="exercises"/>
-		<s:State name="control"/>
-	</s:states>
-	
-	<s:transitions>
-		<s:Transition>
-			<s:Move target="{pagesGroup}" duration="250" easer="{expo}"/>
-		</s:Transition>
-	</s:transitions>
-	
-	<s:Group id="pagesGroup" height="100%" x.theory="0" x.practice="-1000" x.exercises="-2000" x.control="-3000">
-		
-		<s:VGroup id="theoryGroup" width="900" height="100%" x="0" gap="10">
-				<s:DataGroup id="headerDataGroup" width="100%" height="50"/>
-				<s:HGroup  width="100%" height="100%" gap="0">
-					<s:DataGroup id="dataGroup" width="100%" height="100%" >
-						<s:layout>
-							<s:VerticalLayout paddingTop="2" paddingBottom="2"/>
-						</s:layout>
-					</s:DataGroup>
-					<s:VScrollBar id="commandsDataGroupScroller" height="100%" viewport="{dataGroup}" />
-				</s:HGroup>
-		</s:VGroup>
-		
-	</s:Group>
-	
+    <fx:Declarations>
+        <s:Power id="expo" exponent="8"/>
+    </fx:Declarations>
+
+
+    <s:states>
+        <s:State name="theory"/>
+        <s:State name="practice"/>
+        <s:State name="exercises"/>
+        <s:State name="control"/>
+    </s:states>
+
+    <s:transitions>
+        <s:Transition>
+            <s:Move target="{pagesGroup}" duration="250" easer="{expo}"/>
+        </s:Transition>
+    </s:transitions>
+
+    <s:Group id="pagesGroup" height="100%" x.theory="0" x.practice="-1000" x.exercises="-2000" x.control="-3000">
+
+        <s:VGroup id="theoryGroup" width="900" height="100%" x="0" gap="10">
+            <s:DataGroup id="headerDataGroup" width="100%" height="50"/>
+            <s:HGroup  width="100%" height="100%" gap="0">
+                <s:DataGroup id="dataGroup" width="100%" height="100%" >
+                    <s:layout>
+                        <s:VerticalLayout paddingTop="2" paddingBottom="2"/>
+                    </s:layout>
+                </s:DataGroup>
+                <s:VScrollBar id="commandsDataGroupScroller" height="100%" viewport="{dataGroup}" />
+            </s:HGroup>
+        </s:VGroup>
+
+    </s:Group>
+
 </s:SkinnableContainer>

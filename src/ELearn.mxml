@@ -5,6 +5,8 @@
 			   xmlns:Registration="Registration.*"
 			   width="1024"
 			   height="650"
+               maxWidth="1024"
+               maxHeight="650"
 			   frameRate="45"
 			   applicationComplete="onAppComplete(event)"
 			   >

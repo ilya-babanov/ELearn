@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true" >
+	
+	<s:HGroup gap="2" width="100%" paddingLeft="2" paddingRight="2" verticalAlign="middle">
+		<s:RichText text="{data.name}" width="{GlobalConstants.RESULTS_NAME_WIDTH}" height="50" verticalAlign="middle"
+					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" />
+		<s:RichText text="{data.status}" width="{GlobalConstants.RESULTS_STATUS_WIDTH}" height="50" verticalAlign="middle"
+					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"  />
+		<s:RichText text="{data.answer}" width="{GlobalConstants.RESULTS_ANSWER_WIDTH}" height="50" verticalAlign="middle"
+					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
+		<s:RichText text="{data.mark}" width="{GlobalConstants.RESULTS_MARK_WIDTH}" height="50"  verticalAlign="middle"
+					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
+	</s:HGroup>
+	
+</s:ItemRenderer>
