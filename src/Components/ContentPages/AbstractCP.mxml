@@ -38,7 +38,7 @@
 		]]>
 	</fx:Script>
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Power id="expo" exponent="8"/>
 	</fx:Declarations>
 	
 	
@@ -51,7 +51,7 @@
 	
 	<s:transitions>
 		<s:Transition>
-			<s:Move target="{pagesGroup}" duration="250" />
+			<s:Move target="{pagesGroup}" duration="250" easer="{expo}"/>
 		</s:Transition>
 	</s:transitions>
 	

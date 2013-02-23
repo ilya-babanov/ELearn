@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="onCreationComplete(event)">
+		 creationComplete="onCreationComplete(event)"
+		 gap="3">
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
@@ -36,7 +37,7 @@
 					elements.push(textBox);
 				}
 				
-				currentIndex = 1;
+				currentIndex = 0;
 				elements[currentIndex].setFocus();
 				
 			}
@@ -59,12 +60,25 @@
 				}
 			}
 			
+			public function writeMessageToLine(message:Array):void{
+				for (var i:int = 0; i < message.length; i++){
+					elements[i].text = message[i];
+				}
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	
+	<s:Line width="100%">
+		<s:stroke>
+			<s:SolidColorStroke color="#aaaaaa" weight="1.5"/>
+		</s:stroke>
+	</s:Line>
 	<s:HGroup id="tmLineGroup" gap="0" verticalAlign="middle" width="100%"/>
-	
-</s:Group>
+	<s:Line width="100%">
+		<s:stroke>
+			<s:SolidColorStroke color="#aaaaaa" weight="1.5"/>
+		</s:stroke>
+	</s:Line>
+</s:VGroup>

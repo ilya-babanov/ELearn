@@ -7,6 +7,7 @@
 @namespace Menus "Components.Menus.*";
 @namespace TuringMachine "Components.TuringMachine.*";
 @namespace Registration "Registration.*";
+@namespace Components "Components.*";
 
 
 /*--------------------     Registration    -----------------------------*/
@@ -78,7 +79,7 @@ ContentPages|IntroCP s|RichEditableText, ContentPages|FinalTestCP s|RichEditable
 ContentPages|InformalCP s|RichEditableText, ContentPages|StrongCP s|RichEditableText,
 ContentPages|StatisticsCP s|RichEditableText, ContentPages|TuringChurchCP s|RichEditableText
 {
-	fontSize: 15;
+	fontSize: 14;
 	textAlign: justify;
 	paragraphSpaceAfter: 7;
 	paragraphSpaceBefore: 7;
@@ -128,6 +129,19 @@ TuringMachine|TMCommandRenderer s|TextInput{
 
 
 /*--------------------   Other   -----------------------------*/
+
+Components|ResultHeaderRenderer s|RichText{
+	backgroundColor: #dceeff;
+	fontSize: 16;
+	fontStyle: normal;
+	textAlign: center;
+}
+
+Components|ResultRenderer s|TextInput{
+	backgroundColor: #eefeff;
+	fontSize: 15;
+	textAlign: center;
+}
 
 s|VScrollBar{
 	skinClass: ClassReference("Skins.VscrollbarSkin");	

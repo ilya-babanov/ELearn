@@ -32,15 +32,15 @@
 				currentState = "exercises";
 			}
 			
-			protected function onControlEvent(event:Event):void
+			 protected function onControlEvent(event:Event):void
 			{
 				currentState = "control";
-			}
+			} 
 			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Power id="expo" exponent="8"/>
 	</fx:Declarations>
 	
 	
@@ -53,7 +53,7 @@
 	
 	<s:transitions>
 		<s:Transition>
-			<s:Move target="{pagesGroup}" duration="250" />
+			<s:Move target="{pagesGroup}" duration="250" easer="{expo}"/>
 		</s:Transition>
 	</s:transitions>
 	
@@ -98,10 +98,13 @@
 						способной выполнять лишь неольшое число весьма простых операций)
 					</s:li>
 				</s:list>
-				
-				<!--<s:p>
-					Именно о Машинах Тьюринга пойдёт речь далее
-				</s:p>-->
+				<s:p>
+					Использование алгоритмических моделей опирается на тезис
+					Тьюринга-Черча о том, что всякий интуитивный алгоритм может быть выражен средствами одной из
+					алгоритмических моделей. Опровергнуть этот тезис пока никому не удалось.
+					"Доказательством" же тезиса Тьюринга может служить конструктивное построение
+					фон-Неймановской модели из Тьюринговской, что выходит за рамки нашего курса.
+				</s:p>
 			</s:RichEditableText>
 		</s:VGroup>
 		
@@ -119,7 +122,7 @@
 			<s:RichEditableText>
 				Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую 0, вместо последней единицы на ленте.
 			</s:RichEditableText>
-			<TuringMachine:TMview width="100%" height="100%"/>
+			<TuringMachine:TMview  width="100%" height="100%"/>
 		</s:VGroup>
 		
 		

@@ -71,7 +71,7 @@
 			{
 				if(getCommandsFromDataProvider(commandsDataGroupDP)){
 					currentTMState = commandsVector[0].startState;
-					line.currentIndex = 1;
+					line.currentIndex = 0;
 					timer = new Timer(250, 100000);
 					timer.addEventListener(TimerEvent.TIMER, executeCodeByTimer);
 					timer.start();
@@ -80,15 +80,16 @@
 				}
 			}
 			
-			private function parseCodeText(text:String):Boolean
+			public function writeCodeToTM(text:String):Boolean
 			{
 				text = text.replace(GlobalConstants.regExpForBreak, "");
-				
-				trace(text.search(GlobalConstants.regExpForSpace));
 				
 				var commandsArray:Array = text.split(";");
 				var commandStepsArray:Array = [];
 				var stringCommand:String;
+				
+				commandsDataGroup.dataProvider.removeAll();
+				commandsVector = new Vector.<TMCommand>();
 				
 				for (var i:int = 0; i < commandsArray.length; i++){
 					stringCommand = commandsArray[i]
@@ -98,11 +99,22 @@
 						return false;
 					}
 					else{
-						commandsVector.push(new TMCommand(commandStepsArray[0], commandStepsArray[1],
-							commandStepsArray[2], commandStepsArray[3],
-							commandStepsArray[4]));
+						var command:TMCommand = new TMCommand(commandStepsArray[0], commandStepsArray[1],
+													commandStepsArray[2], commandStepsArray[3],
+													commandStepsArray[4]);
+						commandsVector.push(command);
+						commandsDataGroup.dataProvider.addItem(command);
 					}
 				}
+				var addRowButton:Button = new Button();
+				addRowButton.setStyle("skinClass", ButtonSmallSkin);
+				while(commandsDataGroup.dataProvider.length < 7){
+					var emptyCommand:TMCommand = new TMCommand('','','','','');
+					commandsDataGroup.dataProvider.addItem(emptyCommand);
+				}
+				addRowButton.label = "Новая строка";
+				addRowButton.addEventListener(MouseEvent.CLICK, onAddRowButtonClick);
+				commandsDataGroup.dataProvider.addItem(addRowButton);
 				return true;
 			}
 			
@@ -199,7 +211,7 @@
 				} 
 				var addRowButton:Button = new Button();
 				addRowButton.setStyle("skinClass", ButtonSmallSkin);
-				addRowButton.label = "Новая строка";
+				addRowButton.label = "Новая команда";
 				addRowButton.addEventListener(MouseEvent.CLICK, onAddRowButtonClick);
 				commandsDataGroupDP.addItem(addRowButton);
 				
@@ -248,7 +260,7 @@
 		<s:VGroup height="100%">
 			<s:DataGroup id="headerDataGroup" width="100%"/>
 			<s:HGroup  width="100%" height="100%" gap="0">
-				<s:DataGroup id="commandsDataGroup" width="100%" height="100%"  >
+				<s:DataGroup id="commandsDataGroup" width="100%" height="100%" >
 					<s:layout>
 						<s:VerticalLayout paddingTop="2" paddingBottom="2"/>
 					</s:layout>
@@ -257,7 +269,7 @@
 			</s:HGroup>
 		</s:VGroup>
 		
-		<s:RichEditableText height="100%" fontSize="16" >
+		<s:RichEditableText id="descriptionTextField" height="100%" width="100%" fontSize="14" >
 			Описание алгоритма составления программы...
 		</s:RichEditableText>
 		

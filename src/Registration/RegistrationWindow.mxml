@@ -4,7 +4,33 @@
 					  xmlns:mx="library://ns.adobe.com/flex/mx"
 					  width="1024"
 					  height="650"
+					  creationComplete="onCreationComplete(event)"
 					  >
+	<fx:Script>
+		<![CDATA[
+			import flashx.textLayout.elements.BreakElement;
+			
+			import mx.collections.ArrayList;
+			import mx.events.FlexEvent;
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				nameList.dataProvider = GlobalConstants.users;
+				nameList.selectedIndex = 0;
+				
+				submitButton.addEventListener(MouseEvent.CLICK, onSubmitClick);
+			}
+			
+			protected function onSubmitClick(event:MouseEvent):void
+			{
+				if(passwordField.text == GlobalConstants.passwords.getItemAt(nameList.selectedIndex)){
+					var submitEvent:Event = new Event('accept');
+					dispatchEvent(submitEvent);
+				}
+			}
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -12,7 +38,9 @@
 	
 	<s:VGroup id="form" width="60%" height="60%"  verticalCenter="0" horizontalCenter="0" horizontalAlign="center" gap="20">
 		<s:Label id="headerField" text="Обучающий курс по машинам Тьюринга" width="100%"/>
-		<s:TextInput id="nameField" prompt="Ваше имя" width="60%" />
+<!--		<s:TextInput id="nameField" prompt="Ваше имя" width="60%" />-->
+		<s:DropDownList id="nameList" width="60%"/>
+			
 		<s:TextInput id="passwordField" prompt="Пароль" width="60%" displayAsPassword="true"/>
 		<s:Button id="submitButton" label="Вход" width="60%"/>
 	</s:VGroup>

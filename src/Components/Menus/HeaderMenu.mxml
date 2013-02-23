@@ -15,9 +15,10 @@
 	<fx:Script>
 		<![CDATA[
 			import Components.ContentPages.IntroCP;
-			
-			import com.greensock.TweenLite;
-			
+
+            import com.greensock.TweenLite;
+			import com.greensock.easing.Expo;
+
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
 			
@@ -32,6 +33,7 @@
 				btnPractice.addEventListener(MouseEvent.CLICK, onPracticeClick);
 				btnExercises.addEventListener(MouseEvent.CLICK, onExercisesClick);
 				btnControl.addEventListener(MouseEvent.CLICK, onControlClick);
+				
 			}
 			
 			protected function onTheoryClick(event:MouseEvent):void
@@ -39,7 +41,7 @@
 				if(currentContentPage){
 					pressedButton = btnTheory;
 					currentContentPage.dispatchEvent(new Event("Theory", true));
-					TweenLite.to(line,0.4,{x:pressedButton.x});
+					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
 				}
 			}
 			
@@ -48,16 +50,16 @@
 				if(currentContentPage){
 					pressedButton = btnPractice;
 					currentContentPage.dispatchEvent(new Event("Practice", true));
-					TweenLite.to(line,0.4,{x:pressedButton.x});
+					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
 				}
 			}
 			
-			protected function onExercisesClick(event:MouseEvent):void
+			protected function onExercisesClick(event:MouseEvent):void 
 			{
 				if(currentContentPage){
 					pressedButton = btnExercises;
 					currentContentPage.dispatchEvent(new Event("Exercises", true));
-					TweenLite.to(line,0.4,{x:pressedButton.x});
+					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
 				}
 			}
 			
@@ -66,15 +68,31 @@
 				if(currentContentPage){
 					pressedButton = btnControl;	
 					currentContentPage.dispatchEvent(new Event("Control", true));
-					TweenLite.to(line,0.4,{x:pressedButton.x});
+					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
 				}
 			}
 			
 			public function setDefaultProperties():void{
 				onTheoryClick(null);
 			}
+		
+			protected function onTestsBtnClick(event:MouseEvent):void
+			{
+				if(currentContentPage){
+					pressedButton = event.currentTarget as Button;	
+					currentContentPage.dispatchEvent(new Event(event.currentTarget.label, true));
+					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
+				}
+			}
+			
 		]]>
 	</fx:Script>
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="tests"/>
+		<s:State name="results"/>
+	</s:states>
+	
 	<s:layout>
 		<s:HorizontalLayout horizontalAlign="left" verticalAlign="top"/>
 	</s:layout>
@@ -88,12 +106,56 @@
 				 text="{resourceManager.getString(RESOURCE_BUNDLE, 'Header')}" 
 				 verticalCenter="0"/>
 	</s:Group>
-	<s:Button id="btnTheory" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Theory')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
-	<s:Button id="btnPractice" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Practice')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
-	<s:Button id="btnExercises" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Exercises')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
-	<s:Button id="btnControl" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Control')}" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
+	<s:Button id="btnTheory" label.normal="{resourceManager.getString(RESOURCE_BUNDLE, 'Theory')}" 
+			  label.results="{resourceManager.getString(RESOURCE_BUNDLE, 'Results')}"
+			  excludeFrom="tests"
+			  width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
+	<s:Button id="btnPractice" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Practice')}"
+			  includeIn="normal"
+			  width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
+	<s:Button id="btnExercises" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Exercises')}"
+			  includeIn="normal"
+			  width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
+	<s:Button id="btnControl" label="{resourceManager.getString(RESOURCE_BUNDLE, 'Control')}"
+			  includeIn="normal" 
+			  
+			  visible="false"
+			  
+			  width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
 	
-	<s:Line id="line" width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}" x="{btnTheory.x}" y="{btnTheory.y + btnTheory.height + 2}" includeInLayout="false">
+	<s:Button id="btn1" label="№1" click="onTestsBtnClick(event)"
+			  includeIn="tests"
+			  width="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}"/>
+	<s:Button id="btn2" label="№2" click="onTestsBtnClick(event)"
+			  includeIn="tests"
+			  width="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}"/>
+	<s:Button id="btn3" label="№3" click="onTestsBtnClick(event)"
+			  includeIn="tests"
+			  width="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}"/>
+	<s:Button id="btn4" label="№4" click="onTestsBtnClick(event)"
+			  includeIn="tests"
+			  width="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}"/>
+	<s:Button id="btn5" label="№5" click="onTestsBtnClick(event)"
+			  includeIn="tests"
+			  width="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}"/>
+	<s:Button id="btn6" label="№6" click="onTestsBtnClick(event)"
+			  includeIn="tests"
+			  width="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}"/>
+	<!--<s:Button id="btn7" label="№7" click="onTestsBtnClick(event)"
+			  includeIn="tests"
+			  width="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}"/>
+	-->
+	
+	
+	<s:Line id="line" 
+			width.normal="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}" 
+			width.results="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"
+			width.tests="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}" 
+			x.normal="{btnTheory.x}" y.normal="{btnTheory.y + btnTheory.height + 2}" 
+			x.results="{btnTheory.x}" y.results="{btnTheory.y + btnTheory.height + 2}"
+			x.tests="{btn1.x}" y.tests="{btn1.y + btn1.height + 2}" 
+			
+			includeInLayout="false">
 		<s:stroke>
 			<s:SolidColorStroke color="#FF2222" weight="3"/>
 		</s:stroke>

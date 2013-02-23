@@ -4,7 +4,7 @@
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				autoDrawBackground="true" >
 	
-	<s:HGroup gap="5" width="100%" paddingLeft="5" paddingRight="5" verticalAlign="middle">
+	<s:HGroup gap="2" width="100%" paddingLeft="2" paddingRight="2" verticalAlign="middle">
 		<s:RichText text="{data.startState}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}" height="100%" 
 					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" />
 		<s:RichText text="{data.readSymbol}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}" height="100%"

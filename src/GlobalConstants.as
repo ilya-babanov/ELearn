@@ -1,5 +1,7 @@
 package
 {
+	import mx.collections.ArrayList;
+
 	public class GlobalConstants
 	{
 		
@@ -22,6 +24,7 @@ package
 		//Header Menu
 		public static const HEADER_MENU_HEIGHT:int = 35;
 		public static const HEADER_MENU_BUTTON_WIDTH:int = 120;
+		public static const HEADER_MENU_SMALL_BUTTON_WIDTH:int = 65;
 		
 		public static const regExpForBreak:RegExp = /\n/g;
 		public static const regExpForSpace:RegExp = / */;
@@ -36,6 +39,17 @@ package
 		public static const STRONG_EVENT:String = "Strong";
 		public static const FINAL_TEST_EVENT:String = "FinalTest";
 		public static const STATISTICS_EVENT:String = "Statistics";
+		public static const VOCABULARY_EVENT:String = "Vocabulary";
+		public static const LIT_EVENT:String = "Lit";
+		
+		
+		public static const RESULTS_NAME_WIDTH:int = 250;
+		public static const RESULTS_STATUS_WIDTH:int = 100;
+		public static const RESULTS_ANSWER_WIDTH:int = 430;
+		public static const RESULTS_MARK_WIDTH:int = 80;
+		
+		public static var users:ArrayList =  new ArrayList(['Степан 08-405','Светлана 08-404','Администратор']);
+		public static var passwords:ArrayList = new ArrayList(['111','222','333']);
 		
 		public function GlobalConstants()
 		{

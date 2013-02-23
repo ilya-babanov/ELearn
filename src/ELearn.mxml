@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx"
-			   xmlns:Components="Components.*"
-			   xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*" 
-			   xmlns:TuringMachine="Components.TuringMachine.*" xmlns:Registration="Registration.*"
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*"
+			   xmlns:Registration="Registration.*"
 			   width="1024"
 			   height="650"
 			   frameRate="45"
-			   applicationComplete="onAppComplete(event)"  
+			   applicationComplete="onAppComplete(event)"
 			   >
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
@@ -27,68 +25,50 @@
 			import Components.ContentPages.IntroCP;
 			import Components.ContentPages.StatisticsCP;
 			import Components.ContentPages.StrongCP;
-			import Components.ContentPages.TuringChurchCP;
-			
-			import com.greensock.TweenLite;
-			
-			import mx.core.IVisualElement;
+            import com.greensock.TweenLite;
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
-			
-			
-			
+
+
+
 			private const RESOURCE_BUNDLE:String = "Global";
-			
 			private var menuOpen:Boolean = false;
-			
-			private var _currentContentPage:UIComponent;
-			/* private var introCP:IntroCP;
-			private var turingChurchCP:TuringChurchCP;
-			private var strongCP:StrongCP;
-			private var finalTestCP:FinalTestCP;
-			private var statisticsCP:StatisticsCP; */
-			
+
+            private var _currentContentPage:UIComponent;
 			public function get currentContentPage():UIComponent{
 				return _currentContentPage;
 			}
-
 			public function set currentContentPage(value:UIComponent):void{
 				_currentContentPage = value;
 				headerMenu.currentContentPage = value;
 			}
 
 			protected function onAppComplete(event:FlexEvent):void{
+                stage.scaleMode = StageScaleMode.NO_SCALE;
 				configureContentPages();
 				configureListeners();
 				configureRegistrationPanel();
 			}
-			
+
 			private function configureContentPages():void{
-			/* 	introCP = new IntroCP();
-				turingChurchCP = new TuringChurchCP();
-				strongCP = new StrongCP();
-				finalTestCP = new FinalTestCP();
-				statisticsCP = new StatisticsCP(); */
-				
-				//contentPagesGroup.addElement(introCP);
+
 				introCP.visible = true;
 				introCP.alpha = 1;
 				currentContentPage = introCP;
 			}
-			
-			
+
+
 			private function configureListeners():void{
 				openMenuBtn.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
-				registrationWindow.submitButton.addEventListener(MouseEvent.CLICK, onRegistartionSubmitBtnClick);
-				
+				registrationWindow.addEventListener('accept', onRegistartionSubmitBtnClick);
+
 				leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
-				leftMenu.addEventListener(GlobalConstants.TURING_CHURCH_EVENT, onLeftMenuEvent);
 				leftMenu.addEventListener(GlobalConstants.INFORMAL_EVENT, onLeftMenuEvent);
 				leftMenu.addEventListener(GlobalConstants.STRONG_EVENT, onLeftMenuEvent);
 				leftMenu.addEventListener(GlobalConstants.FINAL_TEST_EVENT, onLeftMenuEvent);
 				leftMenu.addEventListener(GlobalConstants.STATISTICS_EVENT, onLeftMenuEvent);
 			}
-			
+
 			protected function onOpenMenuClick(event:MouseEvent):void{
 				mainGroup.includeInLayout = false;
 				if(menuOpen){
@@ -103,11 +83,11 @@
 				}
 				menuOpen = !menuOpen;
 			}
-			
+
 			private function includeMainGroupInLayout():void{
 				mainGroup.includeInLayout = true;
 			}
-			
+
 			protected function onLeftMenuEvent(event:Event):void{
 				switch(event.type)
 				{
@@ -116,26 +96,15 @@
 							removeContentPage(currentContentPage);
 							addNewContentPage(introCP);
 							headerMenu.setDefaultProperties();
+							headerMenu.currentState = 'normal';
 						}
 						break;
-					case GlobalConstants.TURING_CHURCH_EVENT:
-						if(!(currentContentPage is TuringChurchCP)){
-							removeContentPage(currentContentPage);
-							addNewContentPage(turingChurchCP);
-							headerMenu.setDefaultProperties();
-						}
-						break;
-					/* case GlobalConstants.INFORMAL_EVENT:
-						if(!(currentContentPage is InformalCP)){
-							removeContentPage(currentContentPage);
-							addNewContentPage(informalCP);
-						}
-						break; */
 					case GlobalConstants.STRONG_EVENT:
 						if(!(currentContentPage is StrongCP)){
 							removeContentPage(currentContentPage);
 							addNewContentPage(strongCP);
 							headerMenu.setDefaultProperties();
+							headerMenu.currentState = 'normal';
 						}
 						break;
 					case GlobalConstants.FINAL_TEST_EVENT:
@@ -143,6 +112,7 @@
 							removeContentPage(currentContentPage);
 							addNewContentPage(finalTestCP);
 							headerMenu.setDefaultProperties();
+							headerMenu.currentState = 'tests';
 						}
 						break;
 					case GlobalConstants.STATISTICS_EVENT:
@@ -150,18 +120,27 @@
 							removeContentPage(currentContentPage);
 							addNewContentPage(statisticsCP);
 							headerMenu.setDefaultProperties();
+							headerMenu.currentState = 'results';
 						}
 						break;
+					case GlobalConstants.VOCABULARY_EVENT:
+						/* if(!(currentContentPage is StatisticsCP)){
+							removeContentPage(currentContentPage);
+							addNewContentPage(statisticsCP);
+							headerMenu.setDefaultProperties();
+							headerMenu.currentState = 'normal';
+						}
+						break; */
 					default:
 						break;
 				}
 			}
-			
+
 			private function removeContentPage(contentPage:UIComponent):void{
 				contentPage.includeInLayout = false;
-				TweenLite.to(contentPage, 0.2, {alpha: 0, onComplete: removePageFromStage, onCompleteParams: [contentPage]}); 
+				TweenLite.to(contentPage, 0.2, {alpha: 0, onComplete: removePageFromStage, onCompleteParams: [contentPage]});
 			}
-			
+
 			private function addNewContentPage(newContentPage:UIComponent):void{
 				//contentPagesGroup.addElement(newContentPage);
 				newContentPage.y = 30;
@@ -171,24 +150,25 @@
 				TweenLite.to(newContentPage,0.4,{y: 0, alpha: 1});
 				currentContentPage = newContentPage;
 			}
-			
+
 			private function removePageFromStage(contentPage:UIComponent):void{
 				//contentPagesGroup.removeElement(contentPage);
 				contentPage.visible = false;
 			}
-			
+
 			private function configureRegistrationPanel():void
 			{
-				
+
 			}
-			
-			protected function onRegistartionSubmitBtnClick(event:MouseEvent):void
+
+			protected function onRegistartionSubmitBtnClick(event:Event):void
 			{
 				TweenLite.to(registrationWindow, 0.5, {x: -registrationWindow.width, onComplete: deleteRegistrationWindow});
 				mainGroup.includeInLayout = false;
 				TweenLite.fromTo(mainGroup, 0.5, {x:this.width},{x:0});
+				leftMenu.onStatisticsBtn(null);
 			}
-			
+
 			protected function deleteRegistrationWindow():void{
 				this.removeElement(registrationWindow);
 				mainGroup.includeInLayout = true;
@@ -196,16 +176,7 @@
 		]]>
 	</fx:Script>
 	
-	<!--
-	<s:states>
-		<s:State name="IntroCP"/>
-		<s:State name="TuringChurchCP"/>
-		<s:State name="StrongCP"/>
-		<s:State name="FinalTestCP"/>
-		<s:State name="StatisticsCP"/>
-	</s:states>
-	-->
-	
+
 	<s:layout>
 		<s:VerticalLayout gap="0" />
 	</s:layout>
@@ -216,8 +187,6 @@
 	<s:Group id="mainGroup" height="100%" width="100%" x="0">
 		<s:Group id="contentPagesGroup" width="100%" height="100%" top="20" bottom="30" left="80">
 			<ContentPages:IntroCP id="introCP"  alpha="0" height="100%" width="100%" visible="false"/>
-			<ContentPages:TuringChurchCP id="turingChurchCP" height="100%" width="100%" alpha="0" visible="false"/>
-			<!--<ContentPages:InformalCP id="informalCP" height="100%" width="100%" alpha="0" visible="false"/>-->
 			<ContentPages:StrongCP id="strongCP"  alpha="0" height="100%" width="100%" visible="false"/>
 			<ContentPages:FinalTestCP id="finalTestCP"  alpha="0" height="100%" width="100%"  visible="false"/>
 			<ContentPages:StatisticsCP id="statisticsCP"  alpha="0" height="100%" width="100%" visible="false"/>

@@ -5,7 +5,7 @@
 				autoDrawBackground="true">
 	
 	
-	<s:HGroup gap="5" width="100%" paddingLeft="5" paddingRight="5">
+	<s:HGroup gap="2" width="100%" paddingLeft="2" paddingRight="2">
 		<s:TextInput text="@{data.startState}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}" maxChars="4"/>
 		<s:TextInput text="@{data.readSymbol}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}" maxChars="1"/>
 		<s:TextInput text="@{data.writeSymbol}" width="{GlobalConstants.TM_COMMAND_RENDERER_FIELD_WIDTH}" maxChars="1"/>

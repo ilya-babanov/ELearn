@@ -25,11 +25,12 @@
 			
 			private function configureButtons():void{
 				introductionBtn.addEventListener(MouseEvent.CLICK, onIntroductionBtn);
-				turingChurchBtn.addEventListener(MouseEvent.CLICK, onTuringChurchBtn);
+				//turingChurchBtn.addEventListener(MouseEvent.CLICK, onTuringChurchBtn);
 				//informalBtn.addEventListener(MouseEvent.CLICK, onInformalBtn);
 				strongBtn.addEventListener(MouseEvent.CLICK, onStrongBtn);
 				finalTestBtn.addEventListener(MouseEvent.CLICK, onFinalTestBtn);
 				statisticsBtn.addEventListener(MouseEvent.CLICK, onStatisticsBtn);
+				vocabularyBtn.addEventListener(MouseEvent.CLICK, onVocabularyBtn);
 			}
 			
 			protected function onIntroductionBtn(event:MouseEvent):void{
@@ -38,12 +39,12 @@
 				dispatchEvent(e);
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
 			}
-			protected function onTuringChurchBtn(event:MouseEvent):void{
+			/* protected function onTuringChurchBtn(event:MouseEvent):void{
 				pressedButton = turingChurchBtn;
 				var e:Event = new Event(GlobalConstants.TURING_CHURCH_EVENT);
 				dispatchEvent(e);
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
-			}
+			} */
 			protected function onInformalBtn(event:MouseEvent):void{
 				//pressedButton = 
 				var e:Event = new Event(GlobalConstants.INFORMAL_EVENT);
@@ -61,9 +62,17 @@
 				dispatchEvent(e);
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
 			}
-			protected function onStatisticsBtn(event:MouseEvent):void{
+			public function onStatisticsBtn(event:MouseEvent):void{
 				pressedButton = statisticsBtn;
 				var e:Event = new Event(GlobalConstants.STATISTICS_EVENT);
+				dispatchEvent(e);
+				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
+			}
+			
+			protected function onVocabularyBtn(event:MouseEvent):void
+			{
+				pressedButton = statisticsBtn;
+				var e:Event = new Event(GlobalConstants.VOCABULARY_EVENT);
 				dispatchEvent(e);
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
 			}
@@ -83,11 +92,14 @@
 		<s:VGroup id="buttonGroup" width="100%" height="100%" 
 				  gap="2" horizontalAlign="justify" >
 			<s:Button id="introductionBtn" label="{resourceManager.getString(RESOURCE_BUNDLE, GlobalConstants.INTRODUCTION_EVENT)}" />
-			<s:Button id="turingChurchBtn" label="{resourceManager.getString(RESOURCE_BUNDLE, GlobalConstants.TURING_CHURCH_EVENT)}" />
+			<!--<s:Button id="turingChurchBtn" label="{resourceManager.getString(RESOURCE_BUNDLE, GlobalConstants.TURING_CHURCH_EVENT)}" />-->
 			<!--<s:Button id="informalBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants...)}" />-->
 			<s:Button id="strongBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.STRONG_EVENT)}" />
 			<s:Button id="finalTestBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.FINAL_TEST_EVENT)}" />
 			<s:Button id="statisticsBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.STATISTICS_EVENT)}" />
+			<s:Button id="vocabularyBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.VOCABULARY_EVENT)}" />
+			<s:Button id="litBtn" label="{resourceManager.getString(RESOURCE_BUNDLE,GlobalConstants.LIT_EVENT)}" />
+			
 			<s:Ellipse id="dot" width="12" height="12" includeInLayout="false"
 					   x="{introductionBtn.x + introductionBtn.width - 20}" y="{introductionBtn.y + (introductionBtn.height>>1) - (dot.height>>1)}">
 				<s:fill>
