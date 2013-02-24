@@ -58,16 +58,15 @@
             }
             resultsGroup.itemRenderer = new ClassFactory(ResultRenderer);
             resultsGroup.dataProvider = dataGroupDP;
-            setStatus(2,"Выполнено");
         }
 
         public function setStatus(exercise:int, status:String):void{
-            var regLine:RegLine = resultsGroup.dataProvider.getItemAt(exercise) as RegLine;
+            var regLine:RegLine = resultsGroup.dataProvider.getItemAt(exercise-1) as RegLine;
             regLine.status =  status;
         }
 
         public function setAnswer(exercise:int, answer:String):void{
-            var regLine:RegLine = resultsGroup.dataProvider.getItemAt(exercise) as RegLine;
+            var regLine:RegLine = resultsGroup.dataProvider.getItemAt(exercise-1) as RegLine;
             regLine.answer =  answer;
         }
 

@@ -14,6 +14,8 @@
 
         import Skins.ButtonSmallSkin;
 
+        import mx.charts.HitData;
+
         import mx.collections.ArrayCollection;
         import mx.controls.Alert;
         import mx.events.FlexEvent;
@@ -102,10 +104,10 @@
             }
             var addRowButton:Button = new Button();
             addRowButton.setStyle("skinClass", ButtonSmallSkin);
-            while (commandsDataGroup.dataProvider.length < 7) {
+            /*while (commandsDataGroup.dataProvider.length < 7) {
                 var emptyCommand:TMCommand = new TMCommand('', '', '', '', '');
                 commandsDataGroup.dataProvider.addItem(emptyCommand);
-            }
+            }*/
             addRowButton.label = "Новая строка";
             addRowButton.addEventListener(MouseEvent.CLICK, onAddRowButtonClick);
             commandsDataGroup.dataProvider.addItem(addRowButton);
@@ -183,15 +185,23 @@
             var userAnswer:String = '';
             var isCorrect:Boolean = true;
             var event:GradingEvent;
-            for (var i:int = 0; i < answer.length ; i++) {
+            for (var i:int = 0; i < answer.length; i++) {
                 userAnswer += line.elements[i].text;
-                if(line.elements[i].text != answer.charAt(i)){
-                   isCorrect = false;
+                if (line.elements[i].text != answer.charAt(i)) {
+                    isCorrect = false;
                 }
             }
             if (exerciseNumber == 3 && userAnswer == '') {
                 isCorrect = true;
             }
+            userAnswer = '';
+            commandsDataGroup.invalidateDisplayList();
+            commandsDataGroup.validateNow();
+            for (i = 0; i < commandsDataGroupDP.length; i++) {
+                if(commandsDataGroupDP.getItemAt(i) as TMCommand)
+                    userAnswer += (commandsDataGroupDP.getItemAt(i) as TMCommand).toString() + '\n';
+            }
+
             if (isCorrect) {
                 Alert.show('Правильный ответ!');
                 event = new GradingEvent(GradingEvent.TYPE, exerciseNumber, userAnswer, 'Верно');
@@ -199,6 +209,7 @@
                 Alert.show('Задание выполнено неверно!');
                 event = new GradingEvent(GradingEvent.TYPE, exerciseNumber, userAnswer, 'Неверно');
             }
+            dispatchEvent(event);
         }
 
 
@@ -216,9 +227,9 @@
             headerDataGroup.itemRenderer = new ClassFactory(TMHeaderRenderer);
             headerDataGroup.dataProvider = headerDataGroupDP;
 
-            for (var i:int = 0; i < 5; i++) {
+            /*for (var i:int = 0; i < 5; i++) {
                 commandsDataGroupDP.addItem(new TMCommand("", "", "", "", ""));
-            }
+            }*/
             var addRowButton:Button = new Button();
             addRowButton.setStyle("skinClass", ButtonSmallSkin);
             addRowButton.label = "Новая команда";
@@ -243,7 +254,9 @@
         }
 
         protected function onAddRowButtonClick(event:MouseEvent):void {
-            commandsDataGroupDP.addItemAt(new TMCommand("", "", "", "", ""), commandsDataGroupDP.length - 1);
+            var command:TMCommand = new TMCommand("", "", "", "", "");
+            commandsVector.push(command);
+            commandsDataGroupDP.addItemAt(command, commandsDataGroupDP.length - 1);
             commandsDataGroup.validateNow();
             if (commandsDataGroupScroller)
                 commandsDataGroupScroller.viewport.verticalScrollPosition = commandsDataGroupScroller.maximum;

@@ -27,6 +27,7 @@
         import Components.ContentPages.StatisticsCP;
         import Components.ContentPages.StrongCP;
         import Components.GoToExEvent;
+        import Components.GradingEvent;
 
         import com.greensock.TweenLite;
 
@@ -68,12 +69,17 @@
             registrationWindow.addEventListener('accept', onRegistartionSubmitBtnClick);
 
             statisticsCP.addEventListener(GoToExEvent.TYPE, onGoToExEvent);
-
+            finalTestCP.addEventListener(GradingEvent.TYPE, onGradingEvent);
             leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.INFORMAL_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.STRONG_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.FINAL_TEST_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.STATISTICS_EVENT, onLeftMenuEvent);
+        }
+
+        private function onGradingEvent(event:GradingEvent):void {
+             statisticsCP.setAnswer(event.exerciseNumber, event.answer);
+             statisticsCP.setStatus(event.exerciseNumber, event.stratus);
         }
 
         private function onGoToExEvent(event:GoToExEvent):void {

@@ -5,6 +5,8 @@
                       creationComplete="onCreationComplete(event)" xmlns:TuringMachine="Components.TuringMachine.*">
     <fx:Script>
 		<![CDATA[
+        import Components.GradingEvent;
+
         import mx.events.FlexEvent;
 
         protected function onCreationComplete(event:FlexEvent):void
@@ -74,8 +76,8 @@
                     'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
                     + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
                     'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
-
         }
+
 
         protected function onHeaderBtnEvent(event:Event):void
         {

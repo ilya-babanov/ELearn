@@ -7,12 +7,14 @@
     <s:HGroup gap="2" width="100%" paddingLeft="2" paddingRight="2" verticalAlign="middle">
         <!--<s:RichText text="{data.name}" width="{GlobalConstants.RESULTS_NAME_WIDTH}" height="45"  verticalAlign="middle"
                     paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" />-->
-        <s:Button label="{data.name}" width="{GlobalConstants.RESULTS_NAME_WIDTH}" height="45" click="{onBtnClick(event)}"/>
+        <s:Button label="{data.name}" width="{GlobalConstants.RESULTS_NAME_WIDTH}" height="66" click="{onBtnClick(event)}"/>
 
-        <s:RichText id="statusRT" text="@{data.status}" width="{GlobalConstants.RESULTS_STATUS_WIDTH}" height="45" verticalAlign="middle"
+        <s:RichText id="statusRT" text="@{data.status}" width="{GlobalConstants.RESULTS_STATUS_WIDTH}" height="66" verticalAlign="middle"
                     paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"  />
-        <s:RichText id="answerRT" text="@{data.answer}" width="{GlobalConstants.RESULTS_ANSWER_WIDTH}" height="45" verticalAlign="middle"
-                    paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
+        <s:Scroller width="{GlobalConstants.RESULTS_ANSWER_WIDTH}" height="66">
+            <s:RichEditableText id="answerRT" text="@{data.answer}" width="{GlobalConstants.RESULTS_ANSWER_WIDTH - 15}"  verticalAlign="middle"
+                        paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" editable="false" />
+        </s:Scroller>
         <!--<s:RichText text="@{data.mark}" width="{GlobalConstants.RESULTS_MARK_WIDTH}" height="45"  verticalAlign="middle"
                     paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
 -->

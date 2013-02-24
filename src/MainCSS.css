@@ -143,6 +143,11 @@ Components|ResultRenderer s|RichText{
 	textAlign: center;
 
 }
+Components|ResultRenderer s|RichEditableText{
+	backgroundColor: #ffffff;
+	fontSize: 12px;
+	textAlign: center;
+}
 Components|ResultRenderer s|Button{
     skinClass: ClassReference("Skins.ButtonBlueSkin");
 }
