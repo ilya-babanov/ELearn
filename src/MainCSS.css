@@ -40,8 +40,8 @@ Registration|RegistrationWindow s|Button s|Label{
 Menus|HeaderMenu s|Label{
 	fontSize: 19px;
 	fontFamily: Helvetica;
-	paddingLeft: 20px;
-	paddingRight: 20px;
+	paddingLeft: 15px;
+	paddingRight: 15px;
 }
 
 Menus|HeaderMenu s|Button s|Label{

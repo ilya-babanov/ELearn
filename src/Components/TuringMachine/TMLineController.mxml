@@ -1,84 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="onCreationComplete(event)"
-		 gap="3">
-	<fx:Script>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+          xmlns:s="library://ns.adobe.com/flex/spark"
+          xmlns:mx="library://ns.adobe.com/flex/mx"
+          creationComplete="onCreationComplete(event)"
+          gap="3">
+    <fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
-			
-			import spark.components.TextInput;
-			
-			public var elements:Vector.<TextInput>;
-			public var currentIndex:int;
-			
-			public function get currentSymbol():String
-			{
-				return elements[currentIndex].text;
-			}
-			
-			protected function onCreationComplete(event:FlexEvent):void
-			{
-				elements = new Vector.<TextInput>;
-			}
-			
-			public function configureInitialState(textBoxCount:int):void{
-				var textBox:TextInput = null;
-				for (var i:int = 0; i < textBoxCount; i++){
-					textBox = new TextInput();
-					textBox.id = i.toString();
-					textBox.width = GlobalConstants.TURING_LINE_TEXTBOX_WIDTH;
-					textBox.height = GlobalConstants.TURING_LINE_TEXTBOX_HEIGHT;
-					textBox.restrict = GlobalConstants.TURING_LINE_TEXTBOX_RESTRICT;
-					textBox.text = "";
-					textBox.maxChars = 1;
-					tmLineGroup.addElement(textBox);
-					elements.push(textBox);
-				}
-				
-				currentIndex = 0;
-				elements[currentIndex].setFocus();
-				
-			}
-			
-			public function writeSymbol(symbol:String):void{
-				elements[currentIndex].text = symbol;
-			}
-			
-			public function stepRight():void{
-				if(currentIndex < elements.length - 1){
-					currentIndex++;
-					elements[currentIndex].setFocus();				
-				}
-			}
-			
-			public function stepLeft():void{
-				if(currentIndex > 0){
-					currentIndex--;
-					elements[currentIndex].setFocus();					
-				}
-			}
-			
-			public function writeMessageToLine(message:Array):void{
-				for (var i:int = 0; i < message.length; i++){
-					elements[i].text = message[i];
-				}
-			}
-		]]>
+        import mx.events.FlexEvent;
+
+        import spark.components.TextInput;
+
+        public var elements:Vector.<TextInput>;
+        public var currentIndex:int;
+
+        public function get currentSymbol():String
+        {
+            return elements[currentIndex].text;
+        }
+
+        protected function onCreationComplete(event:FlexEvent):void
+        {
+            elements = new Vector.<TextInput>;
+        }
+
+        public function configureInitialState(textBoxCount:int):void{
+            var textBox:TextInput = null;
+            for (var i:int = 0; i < textBoxCount; i++){
+                textBox = new TextInput();
+                textBox.id = i.toString();
+                textBox.width = GlobalConstants.TURING_LINE_TEXTBOX_WIDTH;
+                textBox.height = GlobalConstants.TURING_LINE_TEXTBOX_HEIGHT;
+                textBox.restrict = GlobalConstants.TURING_LINE_TEXTBOX_RESTRICT;
+                textBox.text = "";
+                textBox.maxChars = 1;
+                tmLineGroup.addElement(textBox);
+                elements.push(textBox);
+            }
+
+            currentIndex = 0;
+            elements[currentIndex].setFocus();
+
+        }
+
+        public function writeSymbol(symbol:String):void{
+            elements[currentIndex].text = symbol;
+        }
+
+        public function stepRight():void{
+            if(currentIndex < elements.length - 1){
+                currentIndex++;
+                elements[currentIndex].setFocus();
+            }
+        }
+
+        public function stepLeft():void{
+            if(currentIndex > 0){
+                currentIndex--;
+                elements[currentIndex].setFocus();
+            }
+        }
+
+        public function writeMessageToLine(message:Array):void{
+            for (var i:int = 0; i < message.length; i++){
+                elements[i].text = message[i];
+            }
+        }
+
+        /*public function getLineText():String{
+            var result:String = '';
+            for (var i:int = 0; i < message.length; i++) {
+
+            }
+            return result;
+        }*/
+
+        ]]>
 	</fx:Script>
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
-	<s:Line width="100%">
-		<s:stroke>
-			<s:SolidColorStroke color="#aaaaaa" weight="1.5"/>
-		</s:stroke>
-	</s:Line>
-	<s:HGroup id="tmLineGroup" gap="0" verticalAlign="middle" width="100%"/>
-	<s:Line width="100%">
-		<s:stroke>
-			<s:SolidColorStroke color="#aaaaaa" weight="1.5"/>
-		</s:stroke>
-	</s:Line>
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+    </fx:Declarations>
+    <s:Line width="100%">
+        <s:stroke>
+            <s:SolidColorStroke color="#aaaaaa" weight="1.5"/>
+        </s:stroke>
+    </s:Line>
+    <s:HGroup id="tmLineGroup" gap="0" verticalAlign="middle" width="100%"/>
+    <s:Line width="100%">
+        <s:stroke>
+            <s:SolidColorStroke color="#aaaaaa" weight="1.5"/>
+        </s:stroke>
+    </s:Line>
 </s:VGroup>

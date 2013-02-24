@@ -19,7 +19,7 @@ package Components.TuringMachine
 		}
 		
 		public function toString():String{
-			return "TMCommand [startState: "+startState+"; readSymbol: "+readSymbol +"; writeSymbol: "+writeSymbol+"; action: "+action+"; endState: "+endState+"]";		
+			return "("+startState+"; "+readSymbol +"; "+writeSymbol+"; "+action+"; "+endState+")";
 		}
 	}
 }

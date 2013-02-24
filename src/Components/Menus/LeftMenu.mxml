@@ -32,8 +32,8 @@
 				statisticsBtn.addEventListener(MouseEvent.CLICK, onStatisticsBtn);
 				vocabularyBtn.addEventListener(MouseEvent.CLICK, onVocabularyBtn);
 			}
-			
-			protected function onIntroductionBtn(event:MouseEvent):void{
+
+            public function onIntroductionBtn(event:MouseEvent):void{
 				pressedButton = introductionBtn;
 				var e:Event = new Event(GlobalConstants.INTRODUCTION_EVENT);
 				dispatchEvent(e);
@@ -45,18 +45,18 @@
 				dispatchEvent(e);
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
 			} */
-			protected function onInformalBtn(event:MouseEvent):void{
+            public function onInformalBtn(event:MouseEvent):void{
 				//pressedButton = 
 				var e:Event = new Event(GlobalConstants.INFORMAL_EVENT);
 				dispatchEvent(e);
 			}
-			protected function onStrongBtn(event:MouseEvent):void{
+            public function onStrongBtn(event:MouseEvent):void{
 				pressedButton = strongBtn;
 				var e:Event = new Event(GlobalConstants.STRONG_EVENT);
 				dispatchEvent(e);
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
 			}
-			protected function onFinalTestBtn(event:MouseEvent):void{
+            public function onFinalTestBtn(event:MouseEvent):void{
 				pressedButton = finalTestBtn;
 				var e:Event = new Event(GlobalConstants.FINAL_TEST_EVENT);
 				dispatchEvent(e);
@@ -68,8 +68,8 @@
 				dispatchEvent(e);
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
 			}
-			
-			protected function onVocabularyBtn(event:MouseEvent):void
+
+            public function onVocabularyBtn(event:MouseEvent):void
 			{
 				pressedButton = statisticsBtn;
 				var e:Event = new Event(GlobalConstants.VOCABULARY_EVENT);

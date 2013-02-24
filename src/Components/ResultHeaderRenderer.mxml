@@ -11,8 +11,8 @@
 					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"  />
 		<s:RichText text="{data.answer}" width="{GlobalConstants.RESULTS_ANSWER_WIDTH}" height="50" verticalAlign="middle"
 					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
-		<s:RichText text="{data.mark}" width="{GlobalConstants.RESULTS_MARK_WIDTH}" height="50"  verticalAlign="middle"
-					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
+		<!--<s:RichText text="{data.mark}" width="{GlobalConstants.RESULTS_MARK_WIDTH}" height="50"  verticalAlign="middle"
+					paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>-->
 	</s:HGroup>
 	
 </s:ItemRenderer>

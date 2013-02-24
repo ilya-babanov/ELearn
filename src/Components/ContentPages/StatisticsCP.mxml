@@ -6,6 +6,7 @@
     <fx:Script>
 		<![CDATA[
         import Components.RegLine;
+        import Components.RegLine;
         import Components.ResultHeaderRenderer;
         import Components.ResultRenderer;
 
@@ -16,6 +17,8 @@
         public var gridDataProvider:Array;
 
         private var headerDataGroupDP:ArrayCollection;
+
+        [Bindable]
         private var dataGroupDP:ArrayCollection;
 
         protected function onCreationComplete(event:FlexEvent):void {
@@ -46,16 +49,28 @@
             headerDataGroupDP = new ArrayCollection();
             dataGroupDP = new ArrayCollection();
 
-            headerDataGroupDP.addItem(new RegLine("Задание", "Статус", "Ответ пользователя", "Оценка"));
+            headerDataGroupDP.addItem(new RegLine("Задание", "Статус", "Ответ пользователя"));
             headerDataGroup.itemRenderer = new ClassFactory(ResultHeaderRenderer);
             headerDataGroup.dataProvider = headerDataGroupDP;
 
             for (var i:int = 0; i < 6; i++) {
-                dataGroupDP.addItem(new RegLine(String(i + 1), "Не выплнено", "Нет ответа", "-"));
+                dataGroupDP.addItem(new RegLine(String(i + 1), "Не выплнено", "Нет ответа"));
             }
-            dataGroup.itemRenderer = new ClassFactory(ResultRenderer);
-            dataGroup.dataProvider = dataGroupDP;
+            resultsGroup.itemRenderer = new ClassFactory(ResultRenderer);
+            resultsGroup.dataProvider = dataGroupDP;
+            setStatus(2,"Выполнено");
         }
+
+        public function setStatus(exercise:int, status:String):void{
+            var regLine:RegLine = resultsGroup.dataProvider.getItemAt(exercise) as RegLine;
+            regLine.status =  status;
+        }
+
+        public function setAnswer(exercise:int, answer:String):void{
+            var regLine:RegLine = resultsGroup.dataProvider.getItemAt(exercise) as RegLine;
+            regLine.answer =  answer;
+        }
+
         ]]>
 	</fx:Script>
     <fx:Declarations>
@@ -81,7 +96,7 @@
         <s:VGroup id="theoryGroup" width="900" height="100%" x="0" gap="10">
             <s:DataGroup id="headerDataGroup" width="100%" height="50"/>
             <s:HGroup width="100%" height="100%" gap="0">
-                <s:DataGroup id="dataGroup" width="100%" height="100%">
+                <s:DataGroup id="resultsGroup" width="100%" height="100%">
                     <s:layout>
                         <s:VerticalLayout paddingTop="2" paddingBottom="2"/>
                     </s:layout>

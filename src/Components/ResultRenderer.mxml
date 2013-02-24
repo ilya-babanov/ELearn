@@ -9,19 +9,25 @@
                     paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" />-->
         <s:Button label="{data.name}" width="{GlobalConstants.RESULTS_NAME_WIDTH}" height="45" click="{onBtnClick(event)}"/>
 
-        <s:RichText text="{data.status}" width="{GlobalConstants.RESULTS_STATUS_WIDTH}" height="45" verticalAlign="middle"
+        <s:RichText id="statusRT" text="@{data.status}" width="{GlobalConstants.RESULTS_STATUS_WIDTH}" height="45" verticalAlign="middle"
                     paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"  />
-        <s:RichText text="{data.answer}" width="{GlobalConstants.RESULTS_ANSWER_WIDTH}" height="45" verticalAlign="middle"
+        <s:RichText id="answerRT" text="@{data.answer}" width="{GlobalConstants.RESULTS_ANSWER_WIDTH}" height="45" verticalAlign="middle"
                     paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
-        <s:RichText text="{data.mark}" width="{GlobalConstants.RESULTS_MARK_WIDTH}" height="45"  verticalAlign="middle"
+        <!--<s:RichText text="@{data.mark}" width="{GlobalConstants.RESULTS_MARK_WIDTH}" height="45"  verticalAlign="middle"
                     paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
-
+-->
     </s:HGroup>
 
     <fx:Script><![CDATA[
         private function onBtnClick(event:MouseEvent):void {
-            var ev:ResBtnEvent = new ResBtnEvent(ResBtnEvent.TYPE,data.name);
+            var ev:GoToExEvent = new GoToExEvent(GoToExEvent.TYPE, data.name);
             dispatchEvent(ev);
+        }
+        public function setStatus(status:String):void{
+           statusRT.text = status;
+        }
+        public function setAnswer(answer:String):void{
+            answerRT.text = answer;
         }
         ]]></fx:Script>
 </s:ItemRenderer>

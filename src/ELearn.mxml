@@ -3,11 +3,10 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*"
 			   xmlns:Registration="Registration.*"
-			   width="1024"
-			   height="650"
-               maxWidth="980"
-               maxHeight="620"
-			   frameRate="45"
+			   width="980"
+			   height="620"
+
+			   frameRate="40"
 			   applicationComplete="onAppComplete(event)"
 			   >
 	<fx:Declarations>
@@ -23,164 +22,196 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import Components.ContentPages.FinalTestCP;
-			import Components.ContentPages.IntroCP;
-			import Components.ContentPages.StatisticsCP;
-			import Components.ContentPages.StrongCP;
-            import Components.ResBtnEvent;
+        import Components.ContentPages.FinalTestCP;
+        import Components.ContentPages.IntroCP;
+        import Components.ContentPages.StatisticsCP;
+        import Components.ContentPages.StrongCP;
+        import Components.GoToExEvent;
 
-            import com.greensock.TweenLite;
-			import mx.core.UIComponent;
-			import mx.events.FlexEvent;
+        import com.greensock.TweenLite;
 
-
-
-			private const RESOURCE_BUNDLE:String = "Global";
-			private var menuOpen:Boolean = false;
-
-            private var _currentContentPage:UIComponent;
-			public function get currentContentPage():UIComponent{
-				return _currentContentPage;
-			}
-			public function set currentContentPage(value:UIComponent):void{
-				_currentContentPage = value;
-				headerMenu.currentContentPage = value;
-			}
-
-			protected function onAppComplete(event:FlexEvent):void{
-                stage.scaleMode = StageScaleMode.NO_SCALE;
-                stage.quality = StageQuality.LOW;
-				configureContentPages();
-				configureListeners();
-				configureRegistrationPanel();
-			}
-
-			private function configureContentPages():void{
-
-				introCP.visible = true;
-				introCP.alpha = 1;
-				currentContentPage = introCP;
-			}
+        import mx.core.UIComponent;
+        import mx.events.FlexEvent;
 
 
-			private function configureListeners():void{
-				openMenuBtn.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
-				registrationWindow.addEventListener('accept', onRegistartionSubmitBtnClick);
+        private const RESOURCE_BUNDLE:String = "Global";
+        private var menuOpen:Boolean = false;
 
-                statisticsCP.addEventListener(ResBtnEvent.TYPE,
+        private var _currentContentPage:UIComponent;
+        public function get currentContentPage():UIComponent {
+            return _currentContentPage;
+        }
 
-				leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
-				leftMenu.addEventListener(GlobalConstants.INFORMAL_EVENT, onLeftMenuEvent);
-				leftMenu.addEventListener(GlobalConstants.STRONG_EVENT, onLeftMenuEvent);
-				leftMenu.addEventListener(GlobalConstants.FINAL_TEST_EVENT, onLeftMenuEvent);
-				leftMenu.addEventListener(GlobalConstants.STATISTICS_EVENT, onLeftMenuEvent);
-			}
+        public function set currentContentPage(value:UIComponent):void {
+            _currentContentPage = value;
+            headerMenu.currentContentPage = value;
+        }
 
-			protected function onOpenMenuClick(event:MouseEvent):void{
-				mainGroup.includeInLayout = false;
-				if(menuOpen){
-					contentPagesGroup.removeEventListener(MouseEvent.CLICK, onOpenMenuClick);
-					TweenLite.to(mainGroup,0.3,{x:0, onComplete:includeMainGroupInLayout});
-					TweenLite.to(openMenuBtn,1,{alpha:0.6});
-				}
-				else{
-					contentPagesGroup.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
-					TweenLite.to(mainGroup,0.3,{x:leftMenu.width});
-					TweenLite.to(openMenuBtn,1,{alpha:0});
-				}
-				menuOpen = !menuOpen;
-			}
+        protected function onAppComplete(event:FlexEvent):void {
+            stage.scaleMode = StageScaleMode.NO_SCALE;
+            stage.quality = StageQuality.LOW;
+            configureContentPages();
+            configureListeners();
+            configureRegistrationPanel();
+        }
 
-			private function includeMainGroupInLayout():void{
-				mainGroup.includeInLayout = true;
-			}
+        private function configureContentPages():void {
 
-			protected function onLeftMenuEvent(event:Event):void{
-				switch(event.type)
-				{
-					case GlobalConstants.INTRODUCTION_EVENT:
-						if(!(currentContentPage is IntroCP)){
-							removeContentPage(currentContentPage);
-							addNewContentPage(introCP);
-							headerMenu.setDefaultProperties();
-							headerMenu.currentState = 'intro';
-						}
-						break;
-					case GlobalConstants.STRONG_EVENT:
-						if(!(currentContentPage is StrongCP)){
-							removeContentPage(currentContentPage);
-							addNewContentPage(strongCP);
-							headerMenu.setDefaultProperties();
-							headerMenu.currentState = 'normal';
-						}
-						break;
-					case GlobalConstants.FINAL_TEST_EVENT:
-						if(!(currentContentPage is FinalTestCP)){
-							removeContentPage(currentContentPage);
-							addNewContentPage(finalTestCP);
-							headerMenu.setDefaultProperties();
-							headerMenu.currentState = 'tests';
-						}
-						break;
-					case GlobalConstants.STATISTICS_EVENT:
-						if(!(currentContentPage is StatisticsCP)){
-							removeContentPage(currentContentPage);
-							addNewContentPage(statisticsCP);
-							headerMenu.setDefaultProperties();
-							headerMenu.currentState = 'results';
-						}
-						break;
-					case GlobalConstants.VOCABULARY_EVENT:
-						/* if(!(currentContentPage is StatisticsCP)){
-							removeContentPage(currentContentPage);
-							addNewContentPage(statisticsCP);
-							headerMenu.setDefaultProperties();
-							headerMenu.currentState = 'normal';
-						}
-						break; */
-					default:
-						break;
-				}
-			}
+            introCP.visible = true;
+            introCP.alpha = 1;
+            currentContentPage = introCP;
+        }
 
-			private function removeContentPage(contentPage:UIComponent):void{
-				contentPage.includeInLayout = false;
-				TweenLite.to(contentPage, 0.2, {alpha: 0, onComplete: removePageFromStage, onCompleteParams: [contentPage]});
-			}
 
-			private function addNewContentPage(newContentPage:UIComponent):void{
-				//contentPagesGroup.addElement(newContentPage);
-				newContentPage.y = 30;
-				newContentPage.x = 0;
-				newContentPage.alpha = 0;
-				newContentPage.visible = true;
-				TweenLite.to(newContentPage,0.4,{y: 0, alpha: 1});
-				currentContentPage = newContentPage;
-			}
+        private function configureListeners():void {
+            openMenuBtn.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
+            registrationWindow.addEventListener('accept', onRegistartionSubmitBtnClick);
 
-			private function removePageFromStage(contentPage:UIComponent):void{
-				//contentPagesGroup.removeElement(contentPage);
-				contentPage.visible = false;
-			}
+            statisticsCP.addEventListener(GoToExEvent.TYPE, onGoToExEvent);
 
-			private function configureRegistrationPanel():void
-			{
+            leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
+            leftMenu.addEventListener(GlobalConstants.INFORMAL_EVENT, onLeftMenuEvent);
+            leftMenu.addEventListener(GlobalConstants.STRONG_EVENT, onLeftMenuEvent);
+            leftMenu.addEventListener(GlobalConstants.FINAL_TEST_EVENT, onLeftMenuEvent);
+            leftMenu.addEventListener(GlobalConstants.STATISTICS_EVENT, onLeftMenuEvent);
+        }
 
-			}
+        private function onGoToExEvent(event:GoToExEvent):void {
+            leftMenu.onFinalTestBtn(null);
+            switch (event.data) {
+                case '1':
+                    finalTestCP.currentState = 's1';
+                    headerMenu.line.x = headerMenu.btn1.x;
+                    break;
+                case '2':
+                    finalTestCP.currentState = 's2';
+                    headerMenu.line.x = headerMenu.btn2.x;
+                    break;
+                case '3':
+                    finalTestCP.currentState = 's3';
+                    headerMenu.line.x = headerMenu.btn3.x;
+                    break;
+                case '4':
+                    finalTestCP.currentState = 's4';
+                    headerMenu.line.x = headerMenu.btn4.x;
+                    break;
+                case '5':
+                    finalTestCP.currentState = 's5';
+                    headerMenu.line.x = headerMenu.btn5.x;
+                    break;
+                case '6':
+                    finalTestCP.currentState = 's6';
+                    headerMenu.line.x = headerMenu.btn6.x;
+                    break;
+                /*case '7':
 
-			protected function onRegistartionSubmitBtnClick(event:Event):void
-			{
-				TweenLite.to(registrationWindow, 0.5, {x: -registrationWindow.width, onComplete: deleteRegistrationWindow});
-				mainGroup.includeInLayout = false;
-				TweenLite.fromTo(mainGroup, 0.5, {x:this.width},{x:0});
-				leftMenu.onStatisticsBtn(null);
-			}
+                    break;*/
 
-			protected function deleteRegistrationWindow():void{
-				this.removeElement(registrationWindow);
-				mainGroup.includeInLayout = true;
-			}
-		]]>
+            }
+        }
+
+        protected function onOpenMenuClick(event:MouseEvent):void {
+            mainGroup.includeInLayout = false;
+            if (menuOpen) {
+                contentPagesGroup.removeEventListener(MouseEvent.CLICK, onOpenMenuClick);
+                TweenLite.to(mainGroup, 0.3, {x: 0, onComplete: includeMainGroupInLayout});
+                TweenLite.to(openMenuBtn, 1, {alpha: 0.6});
+            }
+            else {
+                contentPagesGroup.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
+                TweenLite.to(mainGroup, 0.3, {x: leftMenu.width});
+                TweenLite.to(openMenuBtn, 1, {alpha: 0});
+            }
+            menuOpen = !menuOpen;
+        }
+
+        private function includeMainGroupInLayout():void {
+            mainGroup.includeInLayout = true;
+        }
+
+        protected function onLeftMenuEvent(event:Event):void {
+            switch (event.type) {
+                case GlobalConstants.INTRODUCTION_EVENT:
+                    if (!(currentContentPage is IntroCP)) {
+                        removeContentPage(currentContentPage);
+                        addNewContentPage(introCP);
+                        headerMenu.setDefaultProperties();
+                        headerMenu.currentState = 'intro';
+                    }
+                    break;
+                case GlobalConstants.STRONG_EVENT:
+                    if (!(currentContentPage is StrongCP)) {
+                        removeContentPage(currentContentPage);
+                        addNewContentPage(strongCP);
+                        headerMenu.setDefaultProperties();
+                        headerMenu.currentState = 'normal';
+                    }
+                    break;
+                case GlobalConstants.FINAL_TEST_EVENT:
+                    if (!(currentContentPage is FinalTestCP)) {
+                        removeContentPage(currentContentPage);
+                        addNewContentPage(finalTestCP);
+                        //headerMenu.setDefaultProperties();
+                        headerMenu.currentState = 'tests';
+                    }
+                    break;
+                case GlobalConstants.STATISTICS_EVENT:
+                    if (!(currentContentPage is StatisticsCP)) {
+                        removeContentPage(currentContentPage);
+                        addNewContentPage(statisticsCP);
+                        headerMenu.setDefaultProperties();
+                        headerMenu.currentState = 'results';
+                    }
+                    break;
+                case GlobalConstants.VOCABULARY_EVENT:
+                /* if(!(currentContentPage is StatisticsCP)){
+                 removeContentPage(currentContentPage);
+                 addNewContentPage(statisticsCP);
+                 headerMenu.setDefaultProperties();
+                 headerMenu.currentState = 'normal';
+                 }
+                 break; */
+                default:
+                    break;
+            }
+        }
+
+        private function removeContentPage(contentPage:UIComponent):void {
+            contentPage.includeInLayout = false;
+            TweenLite.to(contentPage, 0.2, {alpha: 0, onComplete: removePageFromStage, onCompleteParams: [contentPage]});
+        }
+
+        private function addNewContentPage(newContentPage:UIComponent):void {
+            //contentPagesGroup.addElement(newContentPage);
+            newContentPage.y = 30;
+            newContentPage.x = 0;
+            newContentPage.alpha = 0;
+            newContentPage.visible = true;
+            TweenLite.to(newContentPage, 0.4, {y: 0, alpha: 1});
+            currentContentPage = newContentPage;
+        }
+
+        private function removePageFromStage(contentPage:UIComponent):void {
+            //contentPagesGroup.removeElement(contentPage);
+            contentPage.visible = false;
+        }
+
+        private function configureRegistrationPanel():void {
+
+        }
+
+        protected function onRegistartionSubmitBtnClick(event:Event):void {
+            TweenLite.to(registrationWindow, 0.5, {x: -registrationWindow.width, onComplete: deleteRegistrationWindow});
+            mainGroup.includeInLayout = false;
+            TweenLite.fromTo(mainGroup, 0.5, {x: this.width}, {x: 0});
+            leftMenu.onStatisticsBtn(null);
+        }
+
+        protected function deleteRegistrationWindow():void {
+            this.removeElement(registrationWindow);
+            mainGroup.includeInLayout = true;
+        }
+        ]]>
 	</fx:Script>
 	
 
