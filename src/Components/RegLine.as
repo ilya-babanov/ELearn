@@ -7,7 +7,7 @@ package Components
 		public var status:String;
 		public var mark:String;
 		public var answer:String;
-		
+
 		public function RegLine(name:String, status:String, answer:String, mark:String)
 		{
 			this.name = name;

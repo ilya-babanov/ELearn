@@ -12,7 +12,9 @@
 			
 			import mx.collections.ArrayList;
 			import mx.events.FlexEvent;
-			
+            [Embed(source="../Assets/img1.jpg")]
+            private var image:Class;
+
 			protected function onCreationComplete(event:FlexEvent):void
 			{
 				nameList.dataProvider = GlobalConstants.users;
@@ -43,6 +45,7 @@
 			
 		<s:TextInput id="passwordField" prompt="Пароль" width="60%" displayAsPassword="true"/>
 		<s:Button id="submitButton" label="Вход" width="60%"/>
+        <s:Image source="{image}"> </s:Image>
 	</s:VGroup>
 	
 </s:SkinnableContainer>

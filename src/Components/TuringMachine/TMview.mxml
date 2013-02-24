@@ -92,7 +92,7 @@
 				commandsVector = new Vector.<TMCommand>();
 				
 				for (var i:int = 0; i < commandsArray.length; i++){
-					stringCommand = commandsArray[i]
+					stringCommand = commandsArray[i];
 					commandStepsArray = stringCommand.split(",");
 					if(commandStepsArray.length != 5){
 						Alert.show("Неверный формат!", "Ошибка");

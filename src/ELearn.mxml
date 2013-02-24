@@ -5,8 +5,8 @@
 			   xmlns:Registration="Registration.*"
 			   width="1024"
 			   height="650"
-               maxWidth="1024"
-               maxHeight="650"
+               maxWidth="980"
+               maxHeight="620"
 			   frameRate="45"
 			   applicationComplete="onAppComplete(event)"
 			   >
@@ -27,6 +27,8 @@
 			import Components.ContentPages.IntroCP;
 			import Components.ContentPages.StatisticsCP;
 			import Components.ContentPages.StrongCP;
+            import Components.ResBtnEvent;
+
             import com.greensock.TweenLite;
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
@@ -47,6 +49,7 @@
 
 			protected function onAppComplete(event:FlexEvent):void{
                 stage.scaleMode = StageScaleMode.NO_SCALE;
+                stage.quality = StageQuality.LOW;
 				configureContentPages();
 				configureListeners();
 				configureRegistrationPanel();
@@ -63,6 +66,8 @@
 			private function configureListeners():void{
 				openMenuBtn.addEventListener(MouseEvent.CLICK, onOpenMenuClick);
 				registrationWindow.addEventListener('accept', onRegistartionSubmitBtnClick);
+
+                statisticsCP.addEventListener(ResBtnEvent.TYPE,
 
 				leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
 				leftMenu.addEventListener(GlobalConstants.INFORMAL_EVENT, onLeftMenuEvent);
@@ -98,7 +103,7 @@
 							removeContentPage(currentContentPage);
 							addNewContentPage(introCP);
 							headerMenu.setDefaultProperties();
-							headerMenu.currentState = 'normal';
+							headerMenu.currentState = 'intro';
 						}
 						break;
 					case GlobalConstants.STRONG_EVENT:

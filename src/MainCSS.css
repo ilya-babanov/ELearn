@@ -12,16 +12,16 @@
 
 /*--------------------     Registration    -----------------------------*/
 Registration|RegistrationWindow{
-	backgroundColor: #eeeeee;	
+	backgroundColor: #ffffff;
 }
 
 #headerField{
 	textAlign: center;	
-	fontSize: 22;
+	fontSize: 22px;
 }
 
 Registration|RegistrationWindow s|TextInput{
-	fontSize: 18;
+	fontSize: 18px;
 }
 
 Registration|RegistrationWindow s|Button{
@@ -29,7 +29,7 @@ Registration|RegistrationWindow s|Button{
 }
 
 Registration|RegistrationWindow s|Button s|Label{
-	fontSize: 16;	
+	fontSize: 16px;
 }
 
 
@@ -38,14 +38,14 @@ Registration|RegistrationWindow s|Button s|Label{
 
 /*--------------------     Menu    -----------------------------*/
 Menus|HeaderMenu s|Label{
-	fontSize: 19;
+	fontSize: 19px;
 	fontFamily: Helvetica;
-	paddingLeft: 20;
-	paddingRight: 20;
+	paddingLeft: 20px;
+	paddingRight: 20px;
 }
 
 Menus|HeaderMenu s|Button s|Label{
-	fontSize: 12;
+	fontSize: 12px;
 }
 Menus|HeaderMenu s|Button{
 	skinClass: ClassReference("Skins.ButtonBlueSkin");
@@ -56,8 +56,8 @@ Menus|LeftMenu s|Button{
 }
 
 Menus|LeftMenu s|Button s|Label{
-	fontSize: 13;
-	paddingRight: 5;
+	fontSize: 13px;
+	paddingRight: 5px;
 }
 
 #openMenuBtn{
@@ -71,7 +71,7 @@ Menus|LeftMenu s|Button s|Label{
 ContentPages|IntroCP s|Label, ContentPages|FinalTestCP s|Label, 
 ContentPages|InformalCP s|Label, ContentPages|StrongCP s|Label,
 ContentPages|StatisticsCP s|Label, ContentPages|TuringChurchCP s|Label{
-	fontSize: 16;
+	fontSize: 16px;
 	fontWeight: bold;
 }
 
@@ -79,7 +79,7 @@ ContentPages|IntroCP s|RichEditableText, ContentPages|FinalTestCP s|RichEditable
 ContentPages|InformalCP s|RichEditableText, ContentPages|StrongCP s|RichEditableText,
 ContentPages|StatisticsCP s|RichEditableText, ContentPages|TuringChurchCP s|RichEditableText
 {
-	fontSize: 14;
+	fontSize: 14px;
 	textAlign: justify;
 	paragraphSpaceAfter: 7;
 	paragraphSpaceBefore: 7;
@@ -89,23 +89,23 @@ ContentPages|StatisticsCP s|RichEditableText, ContentPages|TuringChurchCP s|Rich
 
 /*-------------------- Turing Machine -----------------------------*/
 TuringMachine|TMview s|Label{
-	fontSize: 14;
+	fontSize: 14px;
 	fontWeight: normal;
 	fontStyle: italic;
 }
 TuringMachine|TMview s|RichEditableText{
-	fontSize: 18;
+	fontSize: 18px;
 	fontWeight: normal;
-	paddingLeft: 5;
-	paddingTop: 5;
-	paddingBottom: 5;
-	paddingRight: 5;
+	paddingLeft: 5px;
+	paddingTop: 5px;
+	paddingBottom: 5px;
+	paddingRight: 5px;
 	
 }
 
 TuringMachine|TMLineController s|TextInput{
 	textAlign: center;
-	fontSize: 17;
+	fontSize: 17px;
 	skinClass: ClassReference("Skins.TMLineTextInputSkin");
 }
 #commandsDataGroup s|TextInput{
@@ -114,14 +114,14 @@ TuringMachine|TMLineController s|TextInput{
 
 TuringMachine|TMHeaderRenderer s|RichText{
 	backgroundColor: #dceeff;
-	fontSize: 12;
+	fontSize: 12px;
 	fontStyle: normal;
 	textAlign: center;
 }
 
 TuringMachine|TMCommandRenderer s|TextInput{
 	backgroundColor: #eefeff;
-	fontSize: 17;
+	fontSize: 17px;
 	textAlign: center;
 }
 
@@ -132,15 +132,19 @@ TuringMachine|TMCommandRenderer s|TextInput{
 
 Components|ResultHeaderRenderer s|RichText{
 	backgroundColor: #dceeff;
-	fontSize: 16;
+	fontSize: 16px;
 	fontStyle: normal;
 	textAlign: center;
 }
 
-Components|ResultRenderer s|TextInput{
-	backgroundColor: #eefeff;
-	fontSize: 15;
+Components|ResultRenderer s|RichText{
+	backgroundColor: #ffffff;
+	fontSize: 14px;
 	textAlign: center;
+
+}
+Components|ResultRenderer s|Button{
+    skinClass: ClassReference("Skins.ButtonBlueSkin");
 }
 
 s|VScrollBar{

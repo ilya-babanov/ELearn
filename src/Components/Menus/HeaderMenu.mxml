@@ -3,7 +3,7 @@
 					  xmlns:s="library://ns.adobe.com/flex/spark" 
 					  xmlns:mx="library://ns.adobe.com/flex/mx"
 					  height="{GlobalConstants.HEADER_MENU_HEIGHT}"
-					  creationComplete="onCreationCoplete(event)"
+					  creationComplete="onCreationComplete(event)"
 					  >
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
@@ -14,83 +14,77 @@
 	</fx:Metadata>
 	<fx:Script>
 		<![CDATA[
-			import Components.ContentPages.IntroCP;
+        import Components.ContentPages.IntroCP;
 
-            import com.greensock.TweenLite;
-			import com.greensock.easing.Expo;
+        import com.greensock.TweenLite;
+        import com.greensock.easing.Expo;
 
-			import mx.core.UIComponent;
-			import mx.events.FlexEvent;
-			
-			private const RESOURCE_BUNDLE:String = "HeaderMenu";
-			
-			public var currentContentPage:UIComponent;
-			public var pressedButton:Button;
-			
-			protected function onCreationCoplete(event:FlexEvent):void
-			{
-				btnTheory.addEventListener(MouseEvent.CLICK, onTheoryClick);
-				btnPractice.addEventListener(MouseEvent.CLICK, onPracticeClick);
-				btnExercises.addEventListener(MouseEvent.CLICK, onExercisesClick);
-				btnControl.addEventListener(MouseEvent.CLICK, onControlClick);
-				
-			}
-			
-			protected function onTheoryClick(event:MouseEvent):void
-			{
-				if(currentContentPage){
-					pressedButton = btnTheory;
-					currentContentPage.dispatchEvent(new Event("Theory", true));
-					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
-				}
-			}
-			
-			protected function onPracticeClick(event:MouseEvent):void
-			{
-				if(currentContentPage){
-					pressedButton = btnPractice;
-					currentContentPage.dispatchEvent(new Event("Practice", true));
-					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
-				}
-			}
-			
-			protected function onExercisesClick(event:MouseEvent):void 
-			{
-				if(currentContentPage){
-					pressedButton = btnExercises;
-					currentContentPage.dispatchEvent(new Event("Exercises", true));
-					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
-				}
-			}
-			
-			protected function onControlClick(event:MouseEvent):void
-			{
-				if(currentContentPage){
-					pressedButton = btnControl;	
-					currentContentPage.dispatchEvent(new Event("Control", true));
-					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
-				}
-			}
-			
-			public function setDefaultProperties():void{
-				onTheoryClick(null);
-			}
-		
-			protected function onTestsBtnClick(event:MouseEvent):void
-			{
-				if(currentContentPage){
-					pressedButton = event.currentTarget as Button;	
-					currentContentPage.dispatchEvent(new Event(event.currentTarget.label, true));
-					TweenLite.to(line,0.3,{x:pressedButton.x, ease:Expo.easeOut});
-				}
-			}
-			
-		]]>
+        import mx.core.UIComponent;
+        import mx.events.FlexEvent;
+
+        private const RESOURCE_BUNDLE:String = "HeaderMenu";
+
+        public var currentContentPage:UIComponent;
+        public var pressedButton:Button;
+
+        protected function onCreationComplete(event:FlexEvent):void {
+            btnTheory.addEventListener(MouseEvent.CLICK, onTheoryClick);
+            btnPractice.addEventListener(MouseEvent.CLICK, onPracticeClick);
+            btnExercises.addEventListener(MouseEvent.CLICK, onExercisesClick);
+            btnControl.addEventListener(MouseEvent.CLICK, onControlClick);
+
+        }
+
+        protected function onTheoryClick(event:MouseEvent):void {
+            if (currentContentPage) {
+                pressedButton = btnTheory;
+                currentContentPage.dispatchEvent(new Event("Theory", true));
+                TweenLite.to(line, 0.3, {x: pressedButton.x, ease: Expo.easeOut});
+            }
+        }
+
+        protected function onPracticeClick(event:MouseEvent):void {
+            if (currentContentPage) {
+                pressedButton = btnPractice;
+                currentContentPage.dispatchEvent(new Event("Practice", true));
+                TweenLite.to(line, 0.3, {x: pressedButton.x, ease: Expo.easeOut});
+            }
+        }
+
+        protected function onExercisesClick(event:MouseEvent):void {
+            if (currentContentPage) {
+                pressedButton = btnExercises;
+                currentContentPage.dispatchEvent(new Event("Exercises", true));
+                TweenLite.to(line, 0.3, {x: pressedButton.x, ease: Expo.easeOut});
+            }
+        }
+
+        protected function onControlClick(event:MouseEvent):void {
+            if (currentContentPage) {
+                pressedButton = btnControl;
+                currentContentPage.dispatchEvent(new Event("Control", true));
+                TweenLite.to(line, 0.3, {x: pressedButton.x, ease: Expo.easeOut});
+            }
+        }
+
+        public function setDefaultProperties():void {
+            onTheoryClick(null);
+        }
+
+        protected function onTestsBtnClick(event:MouseEvent):void {
+            if (currentContentPage) {
+                pressedButton = event.currentTarget as Button;
+                currentContentPage.dispatchEvent(new Event(event.currentTarget.label, true));
+                TweenLite.to(line, 0.3, {x: pressedButton.x, ease: Expo.easeOut});
+            }
+        }
+        ]]>
 	</fx:Script>
 	<s:states>
 		<s:State name="normal"/>
 		<s:State name="tests"/>
 		<s:State name="results"/>
+		<s:State name="intro"/>
 	</s:states>
 	
 	<s:layout>
@@ -106,7 +100,8 @@
 				 text="{resourceManager.getString(RESOURCE_BUNDLE, 'Header')}" 
 				 verticalCenter="0"/>
 	</s:Group>
-	<s:Button id="btnTheory" label.normal="{resourceManager.getString(RESOURCE_BUNDLE, 'Theory')}" 
+	<s:Button id="btnTheory" label.normal="{resourceManager.getString(RESOURCE_BUNDLE, 'Theory')}"
+              label.intro="{resourceManager.getString(RESOURCE_BUNDLE, 'Theory')}"
 			  label.results="{resourceManager.getString(RESOURCE_BUNDLE, 'Results')}"
 			  excludeFrom="tests"
 			  width="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"/>
@@ -149,9 +144,11 @@
 	
 	<s:Line id="line" 
 			width.normal="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}" 
+			width.intro="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"
 			width.results="{GlobalConstants.HEADER_MENU_BUTTON_WIDTH}"
 			width.tests="{GlobalConstants.HEADER_MENU_SMALL_BUTTON_WIDTH}" 
 			x.normal="{btnTheory.x}" y.normal="{btnTheory.y + btnTheory.height + 2}" 
+			x.intro="{btnTheory.x}" y.intro="{btnTheory.y + btnTheory.height + 2}"
 			x.results="{btnTheory.x}" y.results="{btnTheory.y + btnTheory.height + 2}"
 			x.tests="{btn1.x}" y.tests="{btn1.y + btn1.height + 2}" 
 			

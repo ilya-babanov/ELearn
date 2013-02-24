@@ -1,217 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-					  xmlns:s="library://ns.adobe.com/flex/spark" 
-					  xmlns:mx="library://ns.adobe.com/flex/mx"
-					  creationComplete="onCreationComplete(event)" xmlns:TuringMachine="Components.TuringMachine.*">
-	<fx:Script>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+                      xmlns:s="library://ns.adobe.com/flex/spark"
+                      xmlns:mx="library://ns.adobe.com/flex/mx"
+                      creationComplete="onCreationComplete(event)" xmlns:TuringMachine="Components.TuringMachine.*">
+    <fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
-			
-			protected function onCreationComplete(event:FlexEvent):void
-			{
-				addEventListener("№1", onHeaderBtnEvent);
-				addEventListener("№2", onHeaderBtnEvent);
-				addEventListener("№3", onHeaderBtnEvent);
-				addEventListener("№4", onHeaderBtnEvent);
-				addEventListener("№5", onHeaderBtnEvent);
-				addEventListener("№6", onHeaderBtnEvent);
-				
-				//tm1.line.writeMessageToLine([1,0,1,0,0,1,0,1,1,1]);
-				tm2.line.writeMessageToLine([1,0,1,0,0,1,0,1,1,1]);
-				tm3.line.writeMessageToLine([1,2,0,1,0,2,0]);//1201020
-				tm4.line.writeMessageToLine([1,0,1,0,0,1,0,1,1,0]);//10100110
-				tm5.line.writeMessageToLine([1,0,,1,0,,0,1,0,1,,0,,1]);//10 10 0101 0 1
-				tm6.line.writeMessageToLine([1,0,1,1,0]);//10110
-			}
-			
-			
-			
-			protected function onHeaderBtnEvent(event:Event):void
-			{
-				switch(event.type){
-					case "№1":
-						currentState = 's1';
-						break;
-					case "№2":
-						currentState = 's2';
-						break;
-					case "№3":
-						currentState = 's3';
-						break;
-					case "№4":
-						currentState = 's4';
-						break;
-					case "№5":
-						currentState = 's5';
-						break;
-					case "№6":
-						currentState = 's6';
-						break;
-					case "№7":
-						currentState = 's7';
-						break;
-				}
-			}
-			
-		]]>
+        import mx.events.FlexEvent;
+
+        protected function onCreationComplete(event:FlexEvent):void
+        {
+            addEventListener("№1", onHeaderBtnEvent);
+            addEventListener("№2", onHeaderBtnEvent);
+            addEventListener("№3", onHeaderBtnEvent);
+            addEventListener("№4", onHeaderBtnEvent);
+            addEventListener("№5", onHeaderBtnEvent);
+            addEventListener("№6", onHeaderBtnEvent);
+
+            //tm1.line.writeMessageToLine([1,0,1,0,0,1,0,1,1,1]);
+            tm2.line.writeMessageToLine([1,0,1,0,0,1,0,1,1,1]);
+            tm3.line.writeMessageToLine([1,2,0,1,0,2,0]);//1201020
+            tm4.line.writeMessageToLine([1,0,1,0,0,1,0,1,1,0]);//10100110
+            tm5.line.writeMessageToLine([1,0,,1,0,,0,1,0,1,,0,,1]);//10 10 0101 0 1
+            tm6.line.writeMessageToLine([1,0,1,1,0]);//10110
+
+            tm1.writeCodeToTM("q1,,,,");
+            tm2.writeCodeToTM("q1,,,,");
+            tm3.writeCodeToTM("q1,,,,");
+            tm4.writeCodeToTM("q1,,,,");
+            tm5.writeCodeToTM("q1,,,,");
+            tm6.writeCodeToTM("q1,,,,");
+
+            tm1.descriptionTextField.text = 'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
+                    'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
+                    'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
+                    + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
+                    'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
+            tm2.descriptionTextField.text = 'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
+                    'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
+                    'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
+                    + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
+                    'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
+            tm3.descriptionTextField.text = 'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
+                    'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
+                    'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
+                    + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
+                    'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
+            tm4.descriptionTextField.text = 'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
+                    'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
+                    'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
+                    + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
+                    'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
+            tm5.descriptionTextField.text = 'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
+                    'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
+                    'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
+                    + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
+                    'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
+            tm6.descriptionTextField.text = 'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
+                    'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
+                    'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
+                    + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
+                    'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
+
+        }
+
+
+
+        protected function onHeaderBtnEvent(event:Event):void
+        {
+            switch(event.type){
+                case "№1":
+                    currentState = 's1';
+                    break;
+                case "№2":
+                    currentState = 's2';
+                    break;
+                case "№3":
+                    currentState = 's3';
+                    break;
+                case "№4":
+                    currentState = 's4';
+                    break;
+                case "№5":
+                    currentState = 's5';
+                    break;
+                case "№6":
+                    currentState = 's6';
+                    break;
+                case "№7":
+                    currentState = 's7';
+                    break;
+            }
+        }
+
+        ]]>
 	</fx:Script>
-	<fx:Declarations>
-		<s:Power id="expo" exponent="8"/>
-	</fx:Declarations>
-	
-	
-	<s:states>
-		<s:State name="s1"/>
-		<s:State name="s2"/>
-		<s:State name="s3"/>
-		<s:State name="s4"/>
-		<s:State name="s5"/>
-		<s:State name="s6"/>
-		<s:State name="s7"/>
-	</s:states>
-	
-	<s:transitions>
-		<s:Transition>
-			<s:Move target="{pagesGroup}" duration="250" easer="{expo}"/>
-		</s:Transition>
-	</s:transitions>
-	
-	<s:Group id="pagesGroup" height="100%" x.s1="0" x.s2="-1000" x.s3="-2000" x.s4="-3000" x.s5="-4000" x.s6="-5000" x.s7="-7000">
-		
-		<s:VGroup id="group1" width="900" height="100%" x="0" gap="15">
-			<s:Label id="label1" text="Задание №1" verticalAlign="middle" left="10"/>
-				<s:RichEditableText width="900">
-					Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую на ленту сообщение "Hello, world!".
-					<s:p>
-						Рабочий алфавит - (1,0)
-					</s:p>
-					<s:p>
-						Входного сообщения нет
-					</s:p>
-					<s:p>
-						Начальное состояние - q1
-					</s:p>
-					<s:p fontStyle="italic">
-						Лента машины Тьюринга:
-					</s:p>
-				</s:RichEditableText>
-			<TuringMachine:TMview width="100%" height="100%" id="tm1"/>
-		</s:VGroup>
-		
-		
-		<s:VGroup id="group2" width="900" height="100%" x="1000" >
-			<s:Label id="label2" text="Задание №2" verticalAlign="middle" left="10"/>
-				<s:RichEditableText width="900">
-					Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую 0, вместо последней единицы на ленте.
-					<s:p>
-						Рабочий алфавит - (1,0)
-					</s:p>
-					<s:p>
-						Входное сообщение - "1010010111"
-					</s:p>
-					<s:p>
-						Начальное состояние - q1
-					</s:p>
-					<s:p fontStyle="italic">
-						Лента машины Тьюринга:
-					</s:p>
-				</s:RichEditableText>
-			<TuringMachine:TMview width="100%" height="100%" id="tm2"/>
-		</s:VGroup>
-		
-		
-		<s:VGroup id="group3" width="900" height="100%" x="2000" gap="15" >
-			<s:Label id="label3" text="Задание №3" verticalAlign="middle" left="10"/>
-				<s:RichEditableText width="900">
-					Требуется составить программу в "пятёрках" для машины Тьюринга, которая удаляет исходное сообщение с ленты,
-						останавливаясь после удаления последнего символа.
-					<s:p>
-						Рабочий алфавит - (2,1,0)
-					</s:p>
-					<s:p>
-						Входное сообщение - "1201020"
-					</s:p>
-					<s:p>
-						Начальное состояние - q1
-					</s:p>
-					<s:p fontStyle="italic">
-						Лента машины Тьюринга:
-					</s:p>
-				</s:RichEditableText>
-			<TuringMachine:TMview width="100%" height="100%" id="tm3"/>
-		</s:VGroup>
-		
-		
-		<s:VGroup id="group4" width="900" height="100%" x="3000" >
-			<s:Label id="label4" text="Задание №4" verticalAlign="middle" left="10"/>
-			<s:RichEditableText width="900">
-				Требуется составить программу в "пятёрках" для машины Тьюринга, которая все нули исходного сообщения меняет на еденицы.
-				<s:p>
-					Рабочий алфавит - (1,0)
-				</s:p>
-				<s:p>
-					Входное сообщение - "10100110"
-				</s:p>
-				<s:p>
-					Начальное состояние - q1
-				</s:p>
-				<s:p fontStyle="italic">
-					Лента машины Тьюринга:
-				</s:p>
-			</s:RichEditableText>
-			
-			<TuringMachine:TMview width="100%" height="100%" id="tm4"/>
-		</s:VGroup>
-		
-		<s:VGroup id="group5" width="900" height="100%" x="4000" >
-			<s:Label id="label5" text="Задание №5" verticalAlign="middle" left="10"/>
-			<s:RichEditableText width="900">
-				Требуется составить программу в "пятёрках" для машины Тьюринга, заполняющую каждый пробел в исходном сообщении симолами,
-				находящимеся в предыдущих ячейках, относительно ячейки с пробелом. 
-				<s:p>
-					Рабочий алфавит - (1,0)
-				</s:p>
-				<s:p>
-					Входное сообщение - "10 10 0101 0 1"
-				</s:p>
-				<s:p>
-					Начальное состояние - q1
-				</s:p>
-				<s:p fontStyle="italic">
-					Лента машины Тьюринга:
-				</s:p>
-			</s:RichEditableText>
-			<TuringMachine:TMview width="100%" height="100%" id="tm5"/>
-		</s:VGroup>
-		
-		<s:VGroup id="group6" width="900" height="100%" x="5000" >
-			<s:Label id="label6" text="Задание №6" verticalAlign="middle" left="10"/>
-			<s:RichEditableText width="900">
-				Требуется составить программу в "пятёрках" для машины Тьюринга, которая справа от исходного сообщения записывает его копию.
-				<s:p>
-					Рабочий алфавит - (1,0)
-				</s:p>
-				<s:p>
-					Входное сообщение - "10110"
-				</s:p>
-				<s:p>
-					Начальное состояние - q1
-				</s:p>
-				<s:p fontStyle="italic">
-					Лента машины Тьюринга:
-				</s:p>
-			</s:RichEditableText>
-			<TuringMachine:TMview width="100%" height="100%" id="tm6"/>
-		</s:VGroup>
-		<!--
-		<s:VGroup id="group7" width="900" height="100%" x="6000" >
-			<s:Label id="label7" text="Задание №7" verticalAlign="middle" left="10"/>
-			<s:RichEditableText>
-				Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую 0, вместо последней единицы на ленте.
-			</s:RichEditableText>
-			<TuringMachine:TMview width="100%" height="100%"/>
-		</s:VGroup>-->
-		
-	</s:Group>
-	
+    <fx:Declarations>
+        <s:Power id="expo" exponent="8"/>
+    </fx:Declarations>
+
+
+    <s:states>
+        <s:State name="s1"/>
+        <s:State name="s2"/>
+        <s:State name="s3"/>
+        <s:State name="s4"/>
+        <s:State name="s5"/>
+        <s:State name="s6"/>
+        <s:State name="s7"/>
+    </s:states>
+
+    <s:transitions>
+        <s:Transition>
+            <s:Move target="{pagesGroup}" duration="250" easer="{expo}"/>
+        </s:Transition>
+    </s:transitions>
+
+    <s:Group id="pagesGroup" height="100%" x.s1="0" x.s2="-1000" x.s3="-2000" x.s4="-3000" x.s5="-4000" x.s6="-5000" x.s7="-7000">
+
+        <s:VGroup id="group1" width="900" height="100%" x="0" gap="15">
+            <s:Label id="label1" text="Задание №1" verticalAlign="middle" left="10"/>
+            <s:RichEditableText width="900">
+                Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую на ленту сообщение "Hello, world!".
+                <s:p>
+                    Рабочий алфавит - (1,0)
+                </s:p>
+                <s:p>
+                    Входного сообщения нет
+                </s:p>
+                <s:p>
+                    Начальное состояние - q1
+                </s:p>
+                <s:p fontStyle="italic">
+                    Лента машины Тьюринга:
+                </s:p>
+            </s:RichEditableText>
+            <TuringMachine:TMview width="100%" height="100%" id="tm1"/>
+        </s:VGroup>
+
+
+        <s:VGroup id="group2" width="900" height="100%" x="1000" >
+            <s:Label id="label2" text="Задание №2" verticalAlign="middle" left="10"/>
+            <s:RichEditableText width="900">
+                Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую 0, вместо последней единицы на ленте.
+                <s:p>
+                    Рабочий алфавит - (1,0)
+                </s:p>
+                <s:p>
+                    Входное сообщение - "1010010111"
+                </s:p>
+                <s:p>
+                    Начальное состояние - q1
+                </s:p>
+                <s:p fontStyle="italic">
+                    Лента машины Тьюринга:
+                </s:p>
+            </s:RichEditableText>
+            <TuringMachine:TMview width="100%" height="100%" id="tm2"/>
+        </s:VGroup>
+
+
+        <s:VGroup id="group3" width="900" height="100%" x="2000" gap="15" >
+            <s:Label id="label3" text="Задание №3" verticalAlign="middle" left="10"/>
+            <s:RichEditableText width="900">
+                Требуется составить программу в "пятёрках" для машины Тьюринга, которая удаляет исходное сообщение с ленты,
+                останавливаясь после удаления последнего символа.
+                <s:p>
+                    Рабочий алфавит - (2,1,0)
+                </s:p>
+                <s:p>
+                    Входное сообщение - "1201020"
+                </s:p>
+                <s:p>
+                    Начальное состояние - q1
+                </s:p>
+                <s:p fontStyle="italic">
+                    Лента машины Тьюринга:
+                </s:p>
+            </s:RichEditableText>
+            <TuringMachine:TMview width="100%" height="100%" id="tm3"/>
+        </s:VGroup>
+
+
+        <s:VGroup id="group4" width="900" height="100%" x="3000" >
+            <s:Label id="label4" text="Задание №4" verticalAlign="middle" left="10"/>
+            <s:RichEditableText width="900">
+                Требуется составить программу в "пятёрках" для машины Тьюринга, которая все нули исходного сообщения меняет на еденицы.
+                <s:p>
+                    Рабочий алфавит - (1,0)
+                </s:p>
+                <s:p>
+                    Входное сообщение - "10100110"
+                </s:p>
+                <s:p>
+                    Начальное состояние - q1
+                </s:p>
+                <s:p fontStyle="italic">
+                    Лента машины Тьюринга:
+                </s:p>
+            </s:RichEditableText>
+
+            <TuringMachine:TMview width="100%" height="100%" id="tm4"/>
+        </s:VGroup>
+
+        <s:VGroup id="group5" width="900" height="100%" x="4000" >
+            <s:Label id="label5" text="Задание №5" verticalAlign="middle" left="10"/>
+            <s:RichEditableText width="900">
+                Требуется составить программу в "пятёрках" для машины Тьюринга, заполняющую каждый пробел в исходном сообщении симолами,
+                находящимеся в предыдущих ячейках, относительно ячейки с пробелом.
+                <s:p>
+                    Рабочий алфавит - (1,0)
+                </s:p>
+                <s:p>
+                    Входное сообщение - "10 10 0101 0 1"
+                </s:p>
+                <s:p>
+                    Начальное состояние - q1
+                </s:p>
+                <s:p fontStyle="italic">
+                    Лента машины Тьюринга:
+                </s:p>
+            </s:RichEditableText>
+            <TuringMachine:TMview width="100%" height="100%" id="tm5"/>
+        </s:VGroup>
+
+        <s:VGroup id="group6" width="900" height="100%" x="5000" >
+            <s:Label id="label6" text="Задание №6" verticalAlign="middle" left="10"/>
+            <s:RichEditableText width="900">
+                Требуется составить программу в "пятёрках" для машины Тьюринга, которая справа от исходного сообщения записывает его копию.
+                <s:p>
+                    Рабочий алфавит - (1,0)
+                </s:p>
+                <s:p>
+                    Входное сообщение - "10110"
+                </s:p>
+                <s:p>
+                    Начальное состояние - q1
+                </s:p>
+                <s:p fontStyle="italic">
+                    Лента машины Тьюринга:
+                </s:p>
+            </s:RichEditableText>
+            <TuringMachine:TMview width="100%" height="100%" id="tm6"/>
+        </s:VGroup>
+        <!--
+        <s:VGroup id="group7" width="900" height="100%" x="6000" >
+            <s:Label id="label7" text="Задание №7" verticalAlign="middle" left="10"/>
+            <s:RichEditableText>
+                Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую 0, вместо последней единицы на ленте.
+            </s:RichEditableText>
+            <TuringMachine:TMview width="100%" height="100%"/>
+        </s:VGroup>-->
+
+    </s:Group>
+
 </s:SkinnableContainer>

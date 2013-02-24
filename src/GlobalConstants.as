@@ -43,8 +43,8 @@ package
 		public static const LIT_EVENT:String = "Lit";
 		
 		
-		public static const RESULTS_NAME_WIDTH:int = 250;
-		public static const RESULTS_STATUS_WIDTH:int = 100;
+		public static const RESULTS_NAME_WIDTH:int = 200;
+		public static const RESULTS_STATUS_WIDTH:int = 150;
 		public static const RESULTS_ANSWER_WIDTH:int = 430;
 		public static const RESULTS_MARK_WIDTH:int = 80;
 		
