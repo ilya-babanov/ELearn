@@ -69,15 +69,15 @@ Menus|LeftMenu s|Button s|Label{
 
 /*-------------------- Content Pages -----------------------------*/
 ContentPages|IntroCP s|Label, ContentPages|FinalTestCP s|Label, 
-ContentPages|InformalCP s|Label, ContentPages|StrongCP s|Label,
-ContentPages|StatisticsCP s|Label, ContentPages|TuringChurchCP s|Label{
+ContentPages|VocabularyCP s|Label, ContentPages|StrongCP s|Label,
+ContentPages|StatisticsCP s|Label, ContentPages|LibraryCP s|Label{
 	fontSize: 16px;
 	fontWeight: bold;
 }
 
 ContentPages|IntroCP s|RichEditableText, ContentPages|FinalTestCP s|RichEditableText, 
-ContentPages|InformalCP s|RichEditableText, ContentPages|StrongCP s|RichEditableText,
-ContentPages|StatisticsCP s|RichEditableText, ContentPages|TuringChurchCP s|RichEditableText
+ContentPages|VocabularyCP s|RichEditableText, ContentPages|StrongCP s|RichEditableText,
+ContentPages|StatisticsCP s|RichEditableText, ContentPages|LibraryCP s|RichEditableText
 {
 	fontSize: 14px;
 	textAlign: justify;

@@ -22,17 +22,18 @@
 	
 	<fx:Script>
 		<![CDATA[
-        import Components.ContentPages.FinalTestCP;
-        import Components.ContentPages.IntroCP;
-        import Components.ContentPages.StatisticsCP;
-        import Components.ContentPages.StrongCP;
-        import Components.GoToExEvent;
-        import Components.GradingEvent;
-
-        import com.greensock.TweenLite;
-
-        import mx.core.UIComponent;
-        import mx.events.FlexEvent;
+			import Components.ContentPages.FinalTestCP;
+			import Components.ContentPages.IntroCP;
+			import Components.ContentPages.StatisticsCP;
+			import Components.ContentPages.StrongCP;
+			import Components.ContentPages.VocabularyCP;
+			import Components.GoToExEvent;
+			import Components.GradingEvent;
+			
+			import com.greensock.TweenLite;
+			
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
 
 
         private const RESOURCE_BUNDLE:String = "Global";
@@ -70,11 +71,13 @@
 
             statisticsCP.addEventListener(GoToExEvent.TYPE, onGoToExEvent);
             finalTestCP.addEventListener(GradingEvent.TYPE, onGradingEvent);
+			
             leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
-            leftMenu.addEventListener(GlobalConstants.INFORMAL_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.STRONG_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.FINAL_TEST_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.STATISTICS_EVENT, onLeftMenuEvent);
+			leftMenu.addEventListener(GlobalConstants.VOCABULARY_EVENT, onLeftMenuEvent);
+			leftMenu.addEventListener(GlobalConstants.LIT_EVENT, onLeftMenuEvent);
         }
 
         private function onGradingEvent(event:GradingEvent):void {
@@ -170,14 +173,20 @@
                     }
                     break;
                 case GlobalConstants.VOCABULARY_EVENT:
-                /* if(!(currentContentPage is StatisticsCP)){
-                 removeContentPage(currentContentPage);
-                 addNewContentPage(statisticsCP);
-                 headerMenu.setDefaultProperties();
-                 headerMenu.currentState = 'normal';
+                 if(!(currentContentPage is VocabularyCP)){
+	                 removeContentPage(currentContentPage);
+	                 addNewContentPage(vocabularyCP);
+	                 headerMenu.setDefaultProperties();
+	                 headerMenu.currentState = 'vocabulary';
                  }
-                 break; */
-                default:
+                 break; 
+                case GlobalConstants.LIT_EVENT:
+					if(!(currentContentPage is LibraryCP)){
+						removeContentPage(currentContentPage);
+						addNewContentPage(libraryCP);
+						headerMenu.setDefaultProperties();
+						headerMenu.currentState = 'library';
+					}
                     break;
             }
         }
@@ -234,6 +243,8 @@
 			<ContentPages:StrongCP id="strongCP"  alpha="0" height="100%" width="100%" visible="false"/>
 			<ContentPages:FinalTestCP id="finalTestCP"  alpha="0" height="100%" width="100%"  visible="false"/>
 			<ContentPages:StatisticsCP id="statisticsCP"  alpha="0" height="100%" width="100%" visible="false"/>
+			<ContentPages:VocabularyCP id="vocabularyCP"  alpha="0" height="100%" width="100%"  visible="false"/>
+			<ContentPages:LibraryCP id="libraryCP"  alpha="0" height="100%" width="100%" visible="false"/>
 		</s:Group>
 			
 		<s:HGroup x="{-leftMenu.width}" gap="0" height="100%">
