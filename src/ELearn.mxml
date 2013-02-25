@@ -3,10 +3,9 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*"
 			   xmlns:Registration="Registration.*"
-			   width="980"
+			   width="1000"
 			   height="620"
-
-			   frameRate="40"
+			   frameRate="35"
 			   applicationComplete="onAppComplete(event)"
 			   >
 	<fx:Declarations>

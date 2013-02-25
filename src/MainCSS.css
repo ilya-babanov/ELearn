@@ -86,7 +86,6 @@ ContentPages|StatisticsCP s|RichEditableText, ContentPages|LibraryCP s|RichEdita
 }
 
 
-
 /*-------------------- Turing Machine -----------------------------*/
 TuringMachine|TMview s|Label{
 	fontSize: 14px;
@@ -100,7 +99,6 @@ TuringMachine|TMview s|RichEditableText{
 	paddingTop: 5px;
 	paddingBottom: 5px;
 	paddingRight: 5px;
-	
 }
 
 TuringMachine|TMLineController s|TextInput{

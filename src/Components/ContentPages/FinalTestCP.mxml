@@ -133,7 +133,7 @@
 
         <s:VGroup id="group1" width="900" height="100%" x="0" gap="15">
             <s:Label id="label1" text="Задание №1" verticalAlign="middle" left="10"/>
-            <s:RichEditableText width="900">
+            <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую на ленту сообщение "Hello, world!".
                 <s:p>
                     Рабочий алфавит - (1,0)
@@ -154,7 +154,7 @@
 
         <s:VGroup id="group2" width="900" height="100%" x="1000" >
             <s:Label id="label2" text="Задание №2" verticalAlign="middle" left="10"/>
-            <s:RichEditableText width="900">
+            <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую 0, вместо последней единицы на ленте.
                 <s:p>
                     Рабочий алфавит - (1,0)
@@ -175,7 +175,7 @@
 
         <s:VGroup id="group3" width="900" height="100%" x="2000" gap="15" >
             <s:Label id="label3" text="Задание №3" verticalAlign="middle" left="10"/>
-            <s:RichEditableText width="900">
+            <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, которая удаляет исходное сообщение с ленты,
                 останавливаясь после удаления последнего символа.
                 <s:p>
@@ -197,7 +197,7 @@
 
         <s:VGroup id="group4" width="900" height="100%" x="3000" >
             <s:Label id="label4" text="Задание №4" verticalAlign="middle" left="10"/>
-            <s:RichEditableText width="900">
+            <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, которая все нули исходного сообщения меняет на еденицы.
                 <s:p>
                     Рабочий алфавит - (1,0)
@@ -218,7 +218,7 @@
 
         <s:VGroup id="group5" width="900" height="100%" x="4000" >
             <s:Label id="label5" text="Задание №5" verticalAlign="middle" left="10"/>
-            <s:RichEditableText width="900">
+            <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, заполняющую каждый пробел в исходном сообщении симолами,
                 находящимеся в предыдущих ячейках, относительно ячейки с пробелом.
                 <s:p>
@@ -239,7 +239,7 @@
 
         <s:VGroup id="group6" width="900" height="100%" x="5000" >
             <s:Label id="label6" text="Задание №6" verticalAlign="middle" left="10"/>
-            <s:RichEditableText width="900">
+            <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, которая справа от исходного сообщения записывает его копию.
                 <s:p>
                     Рабочий алфавит - (1,0)
@@ -259,7 +259,7 @@
         <!--
         <s:VGroup id="group7" width="900" height="100%" x="6000" >
             <s:Label id="label7" text="Задание №7" verticalAlign="middle" left="10"/>
-            <s:RichEditableText>
+            <s:RichEditableText editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую 0, вместо последней единицы на ленте.
             </s:RichEditableText>
             <TuringMachine:TMview width="100%" height="100%"/>

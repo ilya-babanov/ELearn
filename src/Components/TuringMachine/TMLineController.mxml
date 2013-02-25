@@ -33,6 +33,7 @@
                 textBox.restrict = GlobalConstants.TURING_LINE_TEXTBOX_RESTRICT;
                 textBox.text = "";
                 textBox.maxChars = 1;
+				textBox.editable = false;
                 tmLineGroup.addElement(textBox);
                 elements.push(textBox);
             }

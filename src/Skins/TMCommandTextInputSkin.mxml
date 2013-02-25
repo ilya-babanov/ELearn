@@ -18,7 +18,7 @@
     
     <!-- border --> 
     <!--- @private -->
-    <s:Rect left="15" right="15" top="0" bottom="0" id="border" alpha="0.2">
+    <s:Rect left="14" right="14" top="0" bottom="0" id="border" alpha="0.2">
         <s:stroke>     
             <s:SolidColorStroke id="borderStroke" weight="1" />
         </s:stroke>
@@ -47,7 +47,7 @@
               verticalAlign="middle"
 			  textAlign="center"
               widthInChars="10"
-              left="1" right="1" top="1" bottom="1" />
+              left="2" right="2" top="2" bottom="2" />
     <!--- Defines the Label that is used for prompt text. The includeInLayout property is false so the prompt text does not affect measurement. -->
     <s:Label id="promptDisplay" maxDisplayedLines="1"
                 verticalAlign="middle"
