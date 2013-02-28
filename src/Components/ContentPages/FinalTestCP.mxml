@@ -54,7 +54,14 @@
             tm6.descriptionTextField.text = GlobalConstants.TEXT_ALG;
         }
 
-
+			
+			public function setWrongString(number:int, wrongString:String):void
+			{
+				if(number == 1){
+					label1.text += '\n Ошибка: ' + wrongString; 
+				}
+			}
+			
         protected function onHeaderBtnEvent(event:Event):void
         {
             switch(event.type){
