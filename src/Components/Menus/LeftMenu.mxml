@@ -57,9 +57,8 @@
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});
 			}
 
-            public function onVocabularyBtn(event:MouseEvent):void
-			{
-				pressedButton = statisticsBtn;
+            public function onVocabularyBtn(event:MouseEvent):void {
+				pressedButton = vocabularyBtn;
 				var e:Event = new Event(GlobalConstants.VOCABULARY_EVENT);
 				dispatchEvent(e);
 				TweenLite.to(dot,0.4,{y: pressedButton.y + (pressedButton.height>>1) - (dot.height>>1)});

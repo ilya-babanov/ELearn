@@ -53,7 +53,7 @@
             headerDataGroup.itemRenderer = new ClassFactory(ResultHeaderRenderer);
             headerDataGroup.dataProvider = headerDataGroupDP;
             var hintsArray:Array = [
-                        '(q1, ,H,r,q2)\n(q2, ,e,r,q3)\n(q3, ,l,r,q4)\n(q4, ,o,r,q5)\n(q5, ,!,h,q5)',
+                        '(q1, ,H,r,q2)\n(q2, ,e,r,q3)\n(q3, ,l,r,q4)\n(q4, ,l,r,q5)\n(q5, ,o,r,q6)\n(q6, ,!,h,q6)',
                         '(q1,1,1,r,q1)\n(q1,0,0,r,q1)\n(q1, , ,l,q2)\n(q2,1,0,h,q2)\n(q2,0,0,h,q2)',
                         '(q1,1, ,r,q1)\n(q1,0, ,r,q1)\n(q1,2, ,r,q1)\n(q1, , ,h,q1)',
                         '(q1,1,1,r,q1)\n(q1,0,1,r,q1)\n(q1, , ,h,q2)',
@@ -77,7 +77,7 @@
             regLine.answer =  answer;
         }
 
-        ]]>
+		]]>
 	</fx:Script>
     <fx:Declarations>
         <s:Power id="expo" exponent="8"/>

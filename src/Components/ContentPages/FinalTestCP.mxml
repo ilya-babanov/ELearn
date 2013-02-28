@@ -46,18 +46,12 @@
             tm5.answer = '10010001011001';
             tm6.answer = '10110 10110';
 
-            var algorithmText:String = 'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
-                    'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
-                    'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
-                    + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
-                    'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
-
-            tm1.descriptionTextField.text = algorithmText;
-            tm2.descriptionTextField.text = algorithmText;
-            tm3.descriptionTextField.text = algorithmText;
-            tm4.descriptionTextField.text = algorithmText;
-            tm5.descriptionTextField.text = algorithmText;
-            tm6.descriptionTextField.text = algorithmText;
+            tm1.descriptionTextField.text = GlobalConstants.TEXT_ALG;
+            tm2.descriptionTextField.text = GlobalConstants.TEXT_ALG;
+            tm3.descriptionTextField.text = GlobalConstants.TEXT_ALG;
+            tm4.descriptionTextField.text = GlobalConstants.TEXT_ALG;
+            tm5.descriptionTextField.text = GlobalConstants.TEXT_ALG;
+            tm6.descriptionTextField.text = GlobalConstants.TEXT_ALG;
         }
 
 

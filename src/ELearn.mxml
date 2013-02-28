@@ -82,6 +82,7 @@
         private function onGradingEvent(event:GradingEvent):void {
              statisticsCP.setAnswer(event.exerciseNumber, event.answer);
              statisticsCP.setStatus(event.exerciseNumber, event.stratus);
+			 finalTestCP.setWrongString(event.exerciseNumber, event.wrongString);
         }
 
         private function onGoToExEvent(event:GoToExEvent):void {
@@ -138,6 +139,7 @@
         }
 
         protected function onLeftMenuEvent(event:Event):void {
+			strongCP.timer.stop();
             switch (event.type) {
                 case GlobalConstants.INTRODUCTION_EVENT:
                     if (!(currentContentPage is IntroCP)) {

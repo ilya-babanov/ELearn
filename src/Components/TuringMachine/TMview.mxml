@@ -130,6 +130,9 @@
             currentCommand = findCommand(line.currentSymbol);
             if (!currentCommand) {
                 stopExecute();
+				if(line.initialMessage){
+					line.writeMessageToLine(line.initialMessage);
+				}
                 return;
             }
             //write new symbol
@@ -152,6 +155,9 @@
                 default:
                     Alert.show("Неизвестная команда", "Ошибка");
                     stopExecute();
+					if(line.initialMessage){
+						line.writeMessageToLine(line.initialMessage);
+					}
                     trace("Unknown command");
                     break;
             }
@@ -212,7 +218,8 @@
                 if(line.initialMessage){
                     line.writeMessageToLine(line.initialMessage);
                 }
-                event = new GradingEvent(GradingEvent.TYPE, exerciseNumber, userAnswer, 'Неверно');
+                event = new GradingEvent(GradingEvent.TYPE, exerciseNumber, userAnswer, 'Неверно', "Сообщение на ленте Машины Тьюринга не соответствует правильному решению задачи: "+answer);
+				
             }
             dispatchEvent(event);
         }
@@ -293,11 +300,11 @@
                 <s:VScrollBar id="commandsDataGroupScroller" height="100%" viewport="{commandsDataGroup}" />
             </s:HGroup>
         </s:VGroup>
-
-        <s:RichEditableText id="descriptionTextField" height="100%" width="100%" fontSize="14" editable="false">
-            Описание алгоритма составления программы...
-        </s:RichEditableText>
-
+		<s:Scroller height="100%" width="100%">
+		        <s:RichEditableText id="descriptionTextField"  fontSize="14" editable="false">
+		            Описание алгоритма составления программы...
+		        </s:RichEditableText>
+		</s:Scroller>
     </s:HGroup>
 
     <s:Group id="btnGroup" left="0">

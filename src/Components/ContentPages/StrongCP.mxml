@@ -6,6 +6,23 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
+			 public var timer:Timer = new Timer(10000,10);
+			public var stepText0:String = 'Рассмотрим процесс написания программы машины тьюринга по шагам.\n';
+			public var stepText1:String = stepText0 + ' 1. Начальное состояние МТ - q1, именно его и записываем в первой ячейке первой команды.\n';
+			public var stepText2:String = stepText1 +' 2. Первый символ, который считывает головка МТ находится в первой ячейке ленты, в нашем случае это символ 1. Запишем его в ячейку считываемы символ\n'; 
+			public var stepText3:String = stepText2 + ' 3. Посмотрим на текущее сосотояние МТ и текущий считываемый символ и запишим команды записи и действия, соответствующие нашему заданию.' + 
+				'В нашем случе мы в состонии q1 видим символ 1. Исходя из задания, поскольку это не последний символ на ленте, его менять не следует, поэтому символ для записи будет тот же, и действие МТ будет r - движение вправо\n';
+			public var stepText4:String = stepText3 +' 4. Следует решить, в какое состояние переводить МТ. В нашем случае оставим состояние таким же, так как можно рассмотреть команду МТ с таким же состоянием, но другим считываемым символом. Получилась следующая команда: (q1,1,1,r,q1) \n ' ;
+			public var stepText5:String = stepText4 + ' 5. МТ совершила переход на ячейку вправо и сменила состояние (либо осталась в том же, как в данном примере). Переходим к шагу №3 и начинаем рассуждения заново, имея при этом новый текущий символ и новое текущее состояние.\n' ;
+			public var stepText6:String = stepText5 + ' 6. В команду, которой МТ завершает выполнение задания, в ячейку "действие" записываем символ h (halt), показывая МТ, что нужно завершить работу';
+			
+			public var stepCode0:String = " , , , , ; , , , , ; , , , , ; , , , , ";
+			public var stepCode1:String = "q1,1, , , ; , , , , ;  , , , , ; , , , , ";
+			public var stepCode2:String = "q1,1,1, , ; , , , , ; , , , , ; , , , , ";
+			public var stepCode3:String = "q1,1,1,r, ; , , , , ; , , , , ; , , , , ";
+			public var stepCode4:String = "q1,1,1,r,q1; , , , , ; , , , , ; , , , , ";
+			public var stepCode5:String = "q1,1,1,r,q1; , , , , ; , , , , ; , , , , ";
+			public var stepCode6:String = "q1,1,1,r,q1;q1,0,0,r,q1;q1,,,l,q2;q2,1,0,h,q2";
 			
 			protected function onCreationComplete(event:FlexEvent):void
 			{
@@ -13,26 +30,26 @@
 				addEventListener("Practice", onPracticeEvent);
 				addEventListener("Exercises", onExercisesEvent);
 				addEventListener("Control", onControlEvent);
-
-				practiceTm.writeCodeToTM("q1,0,0,r,q1;q1,1,1,r,q1;q1,,,l,q2;q2,1,0,h,q1");
+				timer.addEventListener(TimerEvent.TIMER, onTimer);
+				
+				practiceTm.writeCodeToTM(stepCode0);
+				practiceTm.descriptionTextField.text = stepText0;
 				practiceTm.line.writeMessageToLine([1,0,1,0,0,1,0,1,1,1]);
-				practiceTm.descriptionTextField.text = 'Слева вы можете увидеть последовательность комманд (программу) для МТ, которая позволяет решить поставленную выше задачу.\n ' +
-                        'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
-                        'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
-                        'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
-                        + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ. '
-                        +'В этом примере МТ в начальном состоянии увидит символ "1", выполнит соответствующую команду (вторая по счёту), переместится в правую ячейку в том же состоянии q1.'
-                        +' Тем самым получим новую пару "состояние-символ" (q1,0) которая укажет МТ следующую для выполнения команду.\n'+
-                        'Таким образом, работа МТ полностью определяется её программой и сообщением, которое было записано на ленте перед началом работы МТ';
-
+				/* var textSteps:String = 'Рассмотрим процесс написания программы машины тьюринга по шагам.\n'
+					+' 1. Начальное состояние МТ - q1, именно его и записываем в первой ячейке первой команды.\n'
+					+' 2. Первый символ, который считывает головка МТ находится в первой ячейке ленты, в нашем случае это символ 1.\n'
+					+' 3. Посмотрим на текущее сосотояние МТ и текущий считываемый символ и запишим команды записи и действия, соответствующие нашему заданию.' +
+						'В нашем случе мы в состонии q1 видим символ 1. Исходя из задания, поскольку это не последний символ на ленте, его менять не следует, поэтому символ для записи будет тот же, и действие МТ будет r - движение вправо\n' +
+						' 4. Следует решить, в какое состояние переводить МТ. В нашем случае оставим состояние таким же, так как можно рассмотреть команду МТ с таким же состоянием, но другим считываемым символом. Получилась следующая команда: (q1,1,1,r,q1) \n ' +
+						' 5. МТ совершила переход на ячейку вправо и сменила состояние (либо осталась в том же, как в данном примере). Переходим к шагу №3 и начинаем рассуждения заново, имея при этом новый текущий символ и новое текущее состояние.\n' +
+						' 6. В команду, которой МТ завершает выполнение задания, в ячейку "действие" записываем символ h (halt), показывая МТ, что нужно завершить работу';
+				 */
+				/* practiceTm.writeCodeToTM("q1,1,1,r,q1;q1,0,0,r,q1;q1,,,l,q2;q2,1,0,h,q1");
+				practiceTm.descriptionTextField.text = textSteps; */
 
                 exercisesTm.writeCodeToTM("q1,,,,");
                 exercisesTm.line.writeMessageToLine([1,0,1,2,0,1,0,1,2,2]);
-                exercisesTm.descriptionTextField.text = 'В первой ячейке первой команды записано начальное состояние (q1), именно в нём будет находиться головка МТ при старте программы. ' +
-                        'Начальной рабочей ячейкой на ленте является первая ячейка ленты.\n' +
-                        'МТ начинает выполнение программы с поиска команды, которая соответствует начальному состоянию головки и текущему символу в рабочей ячейке. '
-                        + 'В результате выполнения этой команды образуется новая пара "состояние-символ" которая определит дальнейшее действие МТ.\n'+
-                        'Для решения поставленной задачи требуется описать все действия МТ для каждой возможной в данном случае пары "состояние-символ" таким образом, что бы записанное на ленте сообщение менялось в соответсвии с поставленной задачей.';
+                exercisesTm.descriptionTextField.text = GlobalConstants.TEXT_ALG;
 			}
 			
 			protected function onTheoryEvent(event:Event):void
@@ -43,6 +60,7 @@
 			protected function onPracticeEvent(event:Event):void
 			{
 				currentState = "practice";
+				timer.start();
 			}
 			
 			protected function onExercisesEvent(event:Event):void
@@ -54,6 +72,34 @@
 			{
 				currentState = "control";
 			}
+			
+			protected function onTimer(event:TimerEvent):void
+			{
+				if(timer.currentCount == 0){
+					practiceTm.writeCodeToTM(stepCode0);
+					practiceTm.descriptionTextField.text = stepText0;
+				} else if(timer.currentCount == 1){
+					practiceTm.writeCodeToTM(stepCode1);
+					practiceTm.descriptionTextField.text = stepText1;
+				}else if(timer.currentCount == 2){
+					practiceTm.writeCodeToTM(stepCode2);
+					practiceTm.descriptionTextField.text = stepText2;
+				}else if(timer.currentCount == 3){
+					practiceTm.writeCodeToTM(stepCode3);
+					practiceTm.descriptionTextField.text = stepText3;
+				}else if(timer.currentCount == 4){
+					practiceTm.writeCodeToTM(stepCode4);
+					practiceTm.descriptionTextField.text = stepText4;
+				}else if(timer.currentCount == 5){
+					practiceTm.writeCodeToTM(stepCode5);
+					practiceTm.descriptionTextField.text = stepText5;
+				}else if(timer.currentCount == 6){
+					practiceTm.writeCodeToTM(stepCode6);
+					practiceTm.descriptionTextField.text = stepText6;
+				}
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
