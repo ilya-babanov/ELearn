@@ -5,22 +5,19 @@
                 autoDrawBackground="false">
 
     <s:HGroup gap="2" width="100%" paddingLeft="2" paddingRight="2" verticalAlign="middle">
-        <!--<s:RichText text="{data.name}" width="{GlobalConstants.RESULTS_NAME_WIDTH}" height="45"  verticalAlign="middle"
-                    paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" />-->
         <s:Button label="{data.name}" width="{GlobalConstants.RESULTS_NAME_WIDTH}" height="66" click="{onBtnClick(event)}"/>
-
         <s:RichText id="statusRT" text="@{data.status}" width="{GlobalConstants.RESULTS_STATUS_WIDTH}" height="66" verticalAlign="middle"
                     paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"  />
         <s:Scroller width="{GlobalConstants.RESULTS_ANSWER_WIDTH}" height="66">
             <s:RichEditableText id="answerRT" text="@{data.answer}" width="{GlobalConstants.RESULTS_ANSWER_WIDTH - 15}"  verticalAlign="middle"
                         paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" editable="false" />
         </s:Scroller>
-        <!--<s:RichText text="@{data.mark}" width="{GlobalConstants.RESULTS_MARK_WIDTH}" height="45"  verticalAlign="middle"
-                    paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5"/>
--->
+        <s:Button id="hintBtn" fontSize="11" label="Подсказка" width="{GlobalConstants.RESULTS_HINT_WIDTH}" height="66" click="{onBtnHintClick(event)}"/>
     </s:HGroup>
 
     <fx:Script><![CDATA[
+        import mx.controls.Alert;
+
         private function onBtnClick(event:MouseEvent):void {
             var ev:GoToExEvent = new GoToExEvent(GoToExEvent.TYPE, data.name);
             dispatchEvent(ev);
@@ -30,6 +27,14 @@
         }
         public function setAnswer(answer:String):void{
             answerRT.text = answer;
+        }
+
+        private function onBtnHintClick(event:MouseEvent):void {
+            if(data.status == 'Не выполнено') {
+                Alert.show('Сначала следует попробовать решить самостоятельно!', "Предупреждение");
+            } else {
+                Alert.show(data.hint, "Одно из возможных решений");
+            }
         }
         ]]></fx:Script>
 </s:ItemRenderer>

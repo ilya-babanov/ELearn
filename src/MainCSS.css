@@ -70,8 +70,8 @@ Menus|LeftMenu s|Button s|Label{
 /*-------------------- Content Pages -----------------------------*/
 ContentPages|IntroCP s|Label, ContentPages|FinalTestCP s|Label, 
 ContentPages|VocabularyCP s|Label, ContentPages|StrongCP s|Label,
-ContentPages|StatisticsCP s|Label, ContentPages|LibraryCP s|Label{
-	fontSize: 16px;
+ ContentPages|LibraryCP s|Label{
+	fontSize: 14px;
 	fontWeight: bold;
 }
 
@@ -130,14 +130,14 @@ TuringMachine|TMCommandRenderer s|TextInput{
 
 Components|ResultHeaderRenderer s|RichText{
 	backgroundColor: #dceeff;
-	fontSize: 16px;
+	fontSize: 15px;
 	fontStyle: normal;
 	textAlign: center;
 }
 
 Components|ResultRenderer s|RichText{
 	backgroundColor: #ffffff;
-	fontSize: 14px;
+	fontSize: 13px;
 	textAlign: center;
 
 }
@@ -154,7 +154,10 @@ s|VScrollBar{
 	skinClass: ClassReference("Skins.VscrollbarSkin");	
 }
 
-
+ContentPages|StatisticsCP s|Label{
+    fontSize: 12px;
+    fontWeight: normal;
+}
 
 
 

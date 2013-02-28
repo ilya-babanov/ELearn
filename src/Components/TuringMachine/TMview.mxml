@@ -182,10 +182,12 @@
         }
 
         private function grading():void {
-            var userAnswer:String = '';
-            var isCorrect:Boolean = true;
-            var event:GradingEvent;
-            for (var i:int = 0; i < answer.length; i++) {
+            var userAnswer:String = '',
+                isCorrect:Boolean = true,
+                event:GradingEvent,
+                length:int = exerciseNumber == 3 ? 7 : answer.length;
+
+            for (var i:int = 0; i < length; i++) {
                 userAnswer += line.elements[i].text;
                 if (line.elements[i].text != answer.charAt(i)) {
                     isCorrect = false;
@@ -207,6 +209,9 @@
                 event = new GradingEvent(GradingEvent.TYPE, exerciseNumber, userAnswer, 'Верно');
             } else {
                 Alert.show('Задание выполнено неверно!');
+                if(line.initialMessage){
+                    line.writeMessageToLine(line.initialMessage);
+                }
                 event = new GradingEvent(GradingEvent.TYPE, exerciseNumber, userAnswer, 'Неверно');
             }
             dispatchEvent(event);

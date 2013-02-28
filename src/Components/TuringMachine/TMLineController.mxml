@@ -12,6 +12,7 @@
 
         public var elements:Vector.<TextInput>;
         public var currentIndex:int;
+        public var initialMessage:Array;
 
         public function get currentSymbol():String
         {
@@ -62,6 +63,7 @@
         }
 
         public function writeMessageToLine(message:Array):void{
+            initialMessage = message;
             for (var i:int = 0; i < message.length; i++){
                 elements[i].text = message[i];
             }

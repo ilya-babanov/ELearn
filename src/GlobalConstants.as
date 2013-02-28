@@ -43,10 +43,10 @@ package
 		public static const LIT_EVENT:String = "Lit";
 		
 		
-		public static const RESULTS_NAME_WIDTH:int = 200;
+		public static const RESULTS_NAME_WIDTH:int = 140;
 		public static const RESULTS_STATUS_WIDTH:int = 150;
-		public static const RESULTS_ANSWER_WIDTH:int = 510;
-		/*public static const RESULTS_MARK_WIDTH:int = 80;*/
+		public static const RESULTS_ANSWER_WIDTH:int = 450;
+		public static const RESULTS_HINT_WIDTH:int = 120;
 		
 		public static var users:ArrayList =  new ArrayList(['Степан 08-405','Светлана 08-404','Администратор']);
 		public static var passwords:ArrayList = new ArrayList(['111','222','333']);

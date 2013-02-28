@@ -50,7 +50,7 @@
 
         protected function onAppComplete(event:FlexEvent):void {
             stage.scaleMode = StageScaleMode.NO_SCALE;
-            stage.quality = StageQuality.LOW;
+            stage.quality = StageQuality.MEDIUM;
             configureContentPages();
             configureListeners();
             configureRegistrationPanel();
