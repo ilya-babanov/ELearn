@@ -9,6 +9,8 @@
 
         import mx.events.FlexEvent;
 
+        public var wrongLabelsArray:Array;
+
         protected function onCreationComplete(event:FlexEvent):void
         {
             addEventListener("№1", onHeaderBtnEvent);
@@ -52,18 +54,33 @@
             tm4.descriptionTextField.text = GlobalConstants.TEXT_ALG;
             tm5.descriptionTextField.text = GlobalConstants.TEXT_ALG;
             tm6.descriptionTextField.text = GlobalConstants.TEXT_ALG;
+
+            wrongLabelsArray  = new Array(wrongLabel1, wrongLabel2, wrongLabel3,wrongLabel4,wrongLabel5,wrongLabel6);
+
         }
 
-			
-			public function setWrongString(number:int, wrongString:String):void
-			{
-				if(number == 1){
-					label1.text += '\n Ошибка: ' + wrongString; 
-				}
-			}
-			
-        protected function onHeaderBtnEvent(event:Event):void
-        {
+
+        public function setWrongString(number:int, wrongString:String):void {
+            if (number > wrongLabelsArray.length) {
+                return;
+            }
+            var wrongLabel:RichEditableText = wrongLabelsArray[number-1] as RichEditableText;
+            wrongLabel.text = '\n Ошибка: ' + wrongString;
+            wrongLabel.visible= true;
+            wrongLabel.includeInLayout= true;
+        }
+
+        public function disableWrongString(number:int):void {
+            if (number > wrongLabelsArray.length) {
+                return;
+            }
+            var wrongLabel:RichEditableText = wrongLabelsArray[number-1] as RichEditableText;
+            wrongLabel.text = '';
+            wrongLabel.visible= false;
+            wrongLabel.includeInLayout= false;
+        }
+
+        protected function onHeaderBtnEvent(event:Event):void {
             switch(event.type){
                 case "№1":
                     currentState = 's1';
@@ -114,7 +131,7 @@
 
     <s:Group id="pagesGroup" height="100%" x.s1="0" x.s2="-1000" x.s3="-2000" x.s4="-3000" x.s5="-4000" x.s6="-5000" x.s7="-7000">
 
-        <s:VGroup id="group1" width="900" height="100%" x="0" gap="15">
+        <s:VGroup id="group1" width="900" height="100%" x="0" gap="5">
             <s:Label id="label1" text="Задание №1" verticalAlign="middle" left="10"/>
             <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую на ленту сообщение "Hello!".
@@ -127,6 +144,10 @@
                 <s:p>
                     Начальное состояние - q1
                 </s:p>
+            </s:RichEditableText>
+
+            <s:RichEditableText id="wrongLabel1" width="900" editable="false" color="red" visible="false" includeInLayout="false"/>
+            <s:RichEditableText width="900" editable="false">
                 <s:p fontStyle="italic">
                     Лента машины Тьюринга:
                 </s:p>
@@ -135,7 +156,7 @@
         </s:VGroup>
 
 
-        <s:VGroup id="group2" width="900" height="100%" x="1000" >
+        <s:VGroup id="group2" width="900" height="100%" x="1000" gap="5">
             <s:Label id="label2" text="Задание №2" verticalAlign="middle" left="10"/>
             <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, записывающую 0, вместо последней единицы на ленте.
@@ -148,6 +169,9 @@
                 <s:p>
                     Начальное состояние - q1
                 </s:p>
+            </s:RichEditableText>
+            <s:RichEditableText id="wrongLabel2" width="900" editable="false" color="red" visible="false" includeInLayout="false"/>
+            <s:RichEditableText width="900" editable="false">
                 <s:p fontStyle="italic">
                     Лента машины Тьюринга:
                 </s:p>
@@ -156,7 +180,7 @@
         </s:VGroup>
 
 
-        <s:VGroup id="group3" width="900" height="100%" x="2000" gap="15" >
+        <s:VGroup id="group3" width="900" height="100%" x="2000" gap="5" >
             <s:Label id="label3" text="Задание №3" verticalAlign="middle" left="10"/>
             <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, которая удаляет исходное сообщение с ленты,
@@ -170,6 +194,10 @@
                 <s:p>
                     Начальное состояние - q1
                 </s:p>
+
+            </s:RichEditableText>
+            <s:RichEditableText id="wrongLabel3" width="900" editable="false" color="red" visible="false" includeInLayout="false"/>
+            <s:RichEditableText width="900" editable="false">
                 <s:p fontStyle="italic">
                     Лента машины Тьюринга:
                 </s:p>
@@ -178,7 +206,7 @@
         </s:VGroup>
 
 
-        <s:VGroup id="group4" width="900" height="100%" x="3000" >
+        <s:VGroup id="group4" width="900" height="100%" x="3000" gap="5">
             <s:Label id="label4" text="Задание №4" verticalAlign="middle" left="10"/>
             <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, которая все нули исходного сообщения меняет на еденицы.
@@ -191,6 +219,9 @@
                 <s:p>
                     Начальное состояние - q1
                 </s:p>
+            </s:RichEditableText>
+            <s:RichEditableText id="wrongLabel4" width="900" editable="false" color="red" visible="false" includeInLayout="false"/>
+            <s:RichEditableText width="900" editable="false">
                 <s:p fontStyle="italic">
                     Лента машины Тьюринга:
                 </s:p>
@@ -199,7 +230,7 @@
             <TuringMachine:TMview width="100%" height="100%" id="tm4"/>
         </s:VGroup>
 
-        <s:VGroup id="group5" width="900" height="100%" x="4000" >
+        <s:VGroup id="group5" width="900" height="100%" x="4000" gap="5">
             <s:Label id="label5" text="Задание №5" verticalAlign="middle" left="10"/>
             <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, заполняющую каждый пробел в исходном сообщении симолами,
@@ -213,6 +244,9 @@
                 <s:p>
                     Начальное состояние - q1
                 </s:p>
+            </s:RichEditableText>
+            <s:RichEditableText id="wrongLabel5" width="900" editable="false" color="red" visible="false" includeInLayout="false"/>
+            <s:RichEditableText width="900" editable="false">
                 <s:p fontStyle="italic">
                     Лента машины Тьюринга:
                 </s:p>
@@ -220,7 +254,7 @@
             <TuringMachine:TMview width="100%" height="100%" id="tm5"/>
         </s:VGroup>
 
-        <s:VGroup id="group6" width="900" height="100%" x="5000" >
+        <s:VGroup id="group6" width="900" height="100%" x="5000" gap="5" >
             <s:Label id="label6" text="Задание №6" verticalAlign="middle" left="10"/>
             <s:RichEditableText width="900" editable="false">
                 Требуется составить программу в "пятёрках" для машины Тьюринга, которая справа от исходного сообщения записывает его копию.
@@ -233,6 +267,9 @@
                 <s:p>
                     Начальное состояние - q1
                 </s:p>
+            </s:RichEditableText>
+            <s:RichEditableText id="wrongLabel6" width="900" editable="false" color="red" visible="false" includeInLayout="false"/>
+            <s:RichEditableText width="900" editable="false">
                 <s:p fontStyle="italic">
                     Лента машины Тьюринга:
                 </s:p>

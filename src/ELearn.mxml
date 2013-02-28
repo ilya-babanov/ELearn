@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
-			   xmlns:s="library://ns.adobe.com/flex/spark"
-			   xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*"
-			   xmlns:Registration="Registration.*"
-			   width="1000"
-			   height="620"
-			   frameRate="35"
-			   applicationComplete="onAppComplete(event)"
-			   >
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
-	
-	<fx:Metadata>
-		[ResourceBundle("Global")]
-	</fx:Metadata>
-	
-	
-	<fx:Style source="MainCSS.css"/>
-	
-	<fx:Script>
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:Menus="Components.Menus.*" xmlns:ContentPages="Components.ContentPages.*"
+               xmlns:Registration="Registration.*"
+               width="1000"
+               height="620"
+               frameRate="35"
+               applicationComplete="onAppComplete(event)"
+        >
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+    </fx:Declarations>
+
+    <fx:Metadata>
+        [ResourceBundle("Global")]
+    </fx:Metadata>
+
+
+    <fx:Style source="MainCSS.css"/>
+
+    <fx:Script>
 		<![CDATA[
-			import Components.ContentPages.FinalTestCP;
-			import Components.ContentPages.IntroCP;
-			import Components.ContentPages.StatisticsCP;
-			import Components.ContentPages.StrongCP;
-			import Components.ContentPages.VocabularyCP;
-			import Components.GoToExEvent;
-			import Components.GradingEvent;
-			
-			import com.greensock.TweenLite;
-			
-			import mx.core.UIComponent;
-			import mx.events.FlexEvent;
+        import Components.ContentPages.FinalTestCP;
+        import Components.ContentPages.IntroCP;
+        import Components.ContentPages.StatisticsCP;
+        import Components.ContentPages.StrongCP;
+        import Components.ContentPages.VocabularyCP;
+        import Components.GoToExEvent;
+        import Components.GradingEvent;
+
+        import com.greensock.TweenLite;
+
+        import mx.core.UIComponent;
+        import mx.events.FlexEvent;
 
 
         private const RESOURCE_BUNDLE:String = "Global";
@@ -70,19 +70,23 @@
 
             statisticsCP.addEventListener(GoToExEvent.TYPE, onGoToExEvent);
             finalTestCP.addEventListener(GradingEvent.TYPE, onGradingEvent);
-			
+
             leftMenu.addEventListener(GlobalConstants.INTRODUCTION_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.STRONG_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.FINAL_TEST_EVENT, onLeftMenuEvent);
             leftMenu.addEventListener(GlobalConstants.STATISTICS_EVENT, onLeftMenuEvent);
-			leftMenu.addEventListener(GlobalConstants.VOCABULARY_EVENT, onLeftMenuEvent);
-			leftMenu.addEventListener(GlobalConstants.LIT_EVENT, onLeftMenuEvent);
+            leftMenu.addEventListener(GlobalConstants.VOCABULARY_EVENT, onLeftMenuEvent);
+            leftMenu.addEventListener(GlobalConstants.LIT_EVENT, onLeftMenuEvent);
         }
 
         private function onGradingEvent(event:GradingEvent):void {
-             statisticsCP.setAnswer(event.exerciseNumber, event.answer);
-             statisticsCP.setStatus(event.exerciseNumber, event.stratus);
-			 finalTestCP.setWrongString(event.exerciseNumber, event.wrongString);
+            statisticsCP.setAnswer(event.exerciseNumber, event.answer);
+            statisticsCP.setStatus(event.exerciseNumber, event.stratus);
+            if (event.wrongString) {
+                finalTestCP.setWrongString(event.exerciseNumber, event.wrongString);
+            } else {
+                finalTestCP.disableWrongString(event.exerciseNumber);
+            }
         }
 
         private function onGoToExEvent(event:GoToExEvent):void {
@@ -114,7 +118,7 @@
                     break;
                 /*case '7':
 
-                    break;*/
+                 break;*/
 
             }
         }
@@ -139,7 +143,7 @@
         }
 
         protected function onLeftMenuEvent(event:Event):void {
-			strongCP.timer.stop();
+            strongCP.timer.stop();
             switch (event.type) {
                 case GlobalConstants.INTRODUCTION_EVENT:
                     if (!(currentContentPage is IntroCP)) {
@@ -174,20 +178,20 @@
                     }
                     break;
                 case GlobalConstants.VOCABULARY_EVENT:
-                 if(!(currentContentPage is VocabularyCP)){
-	                 removeContentPage(currentContentPage);
-	                 addNewContentPage(vocabularyCP);
-	                 headerMenu.setDefaultProperties();
-	                 headerMenu.currentState = 'vocabulary';
-                 }
-                 break; 
+                    if(!(currentContentPage is VocabularyCP)){
+                        removeContentPage(currentContentPage);
+                        addNewContentPage(vocabularyCP);
+                        headerMenu.setDefaultProperties();
+                        headerMenu.currentState = 'vocabulary';
+                    }
+                    break;
                 case GlobalConstants.LIT_EVENT:
-					if(!(currentContentPage is LibraryCP)){
-						removeContentPage(currentContentPage);
-						addNewContentPage(libraryCP);
-						headerMenu.setDefaultProperties();
-						headerMenu.currentState = 'library';
-					}
+                    if(!(currentContentPage is LibraryCP)){
+                        removeContentPage(currentContentPage);
+                        addNewContentPage(libraryCP);
+                        headerMenu.setDefaultProperties();
+                        headerMenu.currentState = 'library';
+                    }
                     break;
             }
         }
@@ -229,33 +233,33 @@
         }
         ]]>
 	</fx:Script>
-	
 
-	<s:layout>
-		<s:VerticalLayout gap="0" />
-	</s:layout>
-	
-	
-	<Menus:HeaderMenu id="headerMenu" width="100%"/>
-	
-	<s:Group id="mainGroup" height="100%" width="100%" x="0">
-		<s:Group id="contentPagesGroup" width="100%" height="100%" top="20" bottom="30" left="80">
-			<ContentPages:IntroCP id="introCP"  alpha="0" height="100%" width="100%" visible="false"/>
-			<ContentPages:StrongCP id="strongCP"  alpha="0" height="100%" width="100%" visible="false"/>
-			<ContentPages:FinalTestCP id="finalTestCP"  alpha="0" height="100%" width="100%"  visible="false"/>
-			<ContentPages:StatisticsCP id="statisticsCP"  alpha="0" height="100%" width="100%" visible="false"/>
-			<ContentPages:VocabularyCP id="vocabularyCP"  alpha="0" height="100%" width="100%"  visible="false"/>
-			<ContentPages:LibraryCP id="libraryCP"  alpha="0" height="100%" width="100%" visible="false"/>
-		</s:Group>
-			
-		<s:HGroup x="{-leftMenu.width}" gap="0" height="100%">
-			<Menus:LeftMenu id="leftMenu" top="20" width="{GlobalConstants.LEFT_MENU_WIDTH}" height="100%"/>
-			<s:Button id="openMenuBtn" width="35" height="100%" alpha="0.6"/>	
-		</s:HGroup>
-		
-	</s:Group>
-	
-	
-	<Registration:RegistrationWindow id="registrationWindow" height="100%" width="100%" x="0" y="0" includeInLayout="false"/>
-	
+
+    <s:layout>
+        <s:VerticalLayout gap="0" />
+    </s:layout>
+
+
+    <Menus:HeaderMenu id="headerMenu" width="100%"/>
+
+    <s:Group id="mainGroup" height="100%" width="100%" x="0">
+        <s:Group id="contentPagesGroup" width="100%" height="100%" top="20" bottom="30" left="80">
+            <ContentPages:IntroCP id="introCP"  alpha="0" height="100%" width="100%" visible="false"/>
+            <ContentPages:StrongCP id="strongCP"  alpha="0" height="100%" width="100%" visible="false"/>
+            <ContentPages:FinalTestCP id="finalTestCP"  alpha="0" height="100%" width="100%"  visible="false"/>
+            <ContentPages:StatisticsCP id="statisticsCP"  alpha="0" height="100%" width="100%" visible="false"/>
+            <ContentPages:VocabularyCP id="vocabularyCP"  alpha="0" height="100%" width="100%"  visible="false"/>
+            <ContentPages:LibraryCP id="libraryCP"  alpha="0" height="100%" width="100%" visible="false"/>
+        </s:Group>
+
+        <s:HGroup x="{-leftMenu.width}" gap="0" height="100%">
+            <Menus:LeftMenu id="leftMenu" top="20" width="{GlobalConstants.LEFT_MENU_WIDTH}" height="100%"/>
+            <s:Button id="openMenuBtn" width="35" height="100%" alpha="0.6"/>
+        </s:HGroup>
+
+    </s:Group>
+
+
+    <Registration:RegistrationWindow id="registrationWindow" height="100%" width="100%" x="0" y="0" includeInLayout="false"/>
+
 </s:Application>
