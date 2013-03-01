@@ -143,7 +143,8 @@
         }
 
         protected function onLeftMenuEvent(event:Event):void {
-            strongCP.timer.stop();
+            strongCP.timer.reset();
+            strongCP.clearExample();
             switch (event.type) {
                 case GlobalConstants.INTRODUCTION_EVENT:
                     if (!(currentContentPage is IntroCP)) {

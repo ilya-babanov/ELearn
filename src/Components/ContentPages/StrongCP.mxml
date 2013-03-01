@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 					  xmlns:s="library://ns.adobe.com/flex/spark" 
-					  xmlns:mx="library://ns.adobe.com/flex/mx"
 					  creationComplete="onCreationComplete(event)" xmlns:TuringMachine="Components.TuringMachine.*">
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
-			 public var timer:Timer = new Timer(10000,10);
+			 public var timer:Timer = new Timer(9000,10);
 			public var stepText0:String = 'Рассмотрим процесс написания программы машины тьюринга по шагам.\n';
-			public var stepText1:String = stepText0 + ' 1. Начальное состояние МТ - q1, именно его и записываем в первой ячейке первой команды.\n';
-			public var stepText2:String = stepText1 +' 2. Первый символ, который считывает головка МТ находится в первой ячейке ленты, в нашем случае это символ 1. Запишем его в ячейку считываемы символ\n'; 
-			public var stepText3:String = stepText2 + ' 3. Посмотрим на текущее сосотояние МТ и текущий считываемый символ и запишим команды записи и действия, соответствующие нашему заданию.' + 
-				'В нашем случе мы в состонии q1 видим символ 1. Исходя из задания, поскольку это не последний символ на ленте, его менять не следует, поэтому символ для записи будет тот же, и действие МТ будет r - движение вправо\n';
-			public var stepText4:String = stepText3 +' 4. Следует решить, в какое состояние переводить МТ. В нашем случае оставим состояние таким же, так как можно рассмотреть команду МТ с таким же состоянием, но другим считываемым символом. Получилась следующая команда: (q1,1,1,r,q1) \n ' ;
-			public var stepText5:String = stepText4 + ' 5. МТ совершила переход на ячейку вправо и сменила состояние (либо осталась в том же, как в данном примере). Переходим к шагу №3 и начинаем рассуждения заново, имея при этом новый текущий символ и новое текущее состояние.\n' ;
-			public var stepText6:String = stepText5 + ' 6. В команду, которой МТ завершает выполнение задания, в ячейку "действие" записываем символ h (halt), показывая МТ, что нужно завершить работу';
+			public var stepText1:String = stepText0 + ' 1. Начальное состояние МТ - q1,' +
+                    ' именно его и записываем в первой ячейке первой команды.\n';
+			public var stepText2:String = stepText1 +' 2. Первый символ, который считывает головка МТ' +
+                    ' находится в первой ячейке ленты, в нашем случае это символ 1. Запишем его в ячейку "считываемый символ"\n';
+			public var stepText3:String = stepText2 + ' 3. Посмотрим на текущее сосотояние МТ и текущий' +
+                    ' считываемый символ и запишим команды записи и действия, соответствующие нашему заданию.' +
+				'В нашем случе мы в состонии q1 видим символ 1. Исходя из задания, ' +
+                    'поскольку это не последний символ на ленте, его менять не следует, ' +
+                    'поэтому символ для записи будет тот же, и действие МТ будет r - движение вправо\n';
+			public var stepText4:String = stepText3 +' 4. Следует решить, в какое состояние переводить МТ.' +
+                    ' В нашем случае оставим состояние таким же, так как можно рассмотреть команду МТ с таким же состоянием,' +
+                    ' но другим считываемым символом. Получилась следующая команда: (q1,1,1,r,q1) \n ' ;
+			public var stepText5:String = stepText4 + ' 5. МТ совершила переход на ячейку вправо и сменила состояние ' +
+                    '(либо осталась в том же, как в данном примере). Переходим к шагу №3 и начинаем рассуждения заново,' +
+                    ' имея при этом новый текущий символ и новое текущее состояние.\n' ;
+			public var stepText6:String = stepText5 + ' 6. В команду, которой МТ завершает выполнение задания,' +
+                    ' в ячейку "действие" записываем символ h (halt), показывая МТ, что нужно завершить работу';
 			
 			public var stepCode0:String = " , , , , ; , , , , ; , , , , ; , , , , ";
 			public var stepCode1:String = "q1,1, , , ; , , , , ;  , , , , ; , , , , ";
@@ -51,10 +60,16 @@
                 exercisesTm.line.writeMessageToLine([1,0,1,2,0,1,0,1,2,2]);
                 exercisesTm.descriptionTextField.text = GlobalConstants.TEXT_ALG;
 			}
-			
+
+            public function clearExample():void{
+                practiceTm.writeCodeToTM(stepCode0);
+                practiceTm.descriptionTextField.text = stepText0;
+            }
+
 			protected function onTheoryEvent(event:Event):void
 			{
 				currentState = "theory";
+                timer.stop();
 			}
 			
 			protected function onPracticeEvent(event:Event):void
@@ -66,11 +81,13 @@
 			protected function onExercisesEvent(event:Event):void
 			{
 				currentState = "exercises";
+                timer.stop();
 			}
 			
 			protected function onControlEvent(event:Event):void
 			{
 				currentState = "control";
+                timer.stop();
 			}
 			
 			protected function onTimer(event:TimerEvent):void
