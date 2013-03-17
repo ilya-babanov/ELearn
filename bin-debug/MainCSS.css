@@ -1,0 +1,175 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace local "*";
+@namespace VisualComponents "VisualComponents.*";
+@namespace ContentPages "Components.ContentPages.*";
+@namespace Menus "Components.Menus.*";
+@namespace TuringMachine "Components.TuringMachine.*";
+@namespace Registration "Registration.*";
+@namespace Components "Components.*";
+
+
+/*--------------------     Registration    -----------------------------*/
+Registration|RegistrationWindow{
+	backgroundColor: #ffffff;
+}
+
+#headerField{
+	textAlign: center;	
+	fontSize: 22px;
+}
+
+Registration|RegistrationWindow s|TextInput{
+	fontSize: 18px;
+}
+
+Registration|RegistrationWindow s|Button{
+	skinClass: ClassReference("Skins.ButtonBlueSkin");
+}
+
+Registration|RegistrationWindow s|Button s|Label{
+	fontSize: 16px;
+}
+
+
+
+
+
+/*--------------------     Menu    -----------------------------*/
+Menus|HeaderMenu s|Label{
+	fontSize: 19px;
+	fontFamily: Helvetica;
+	paddingLeft: 15px;
+	paddingRight: 15px;
+}
+
+Menus|HeaderMenu s|Button s|Label{
+	fontSize: 12px;
+}
+Menus|HeaderMenu s|Button{
+	skinClass: ClassReference("Skins.ButtonBlueSkin");
+}
+
+Menus|LeftMenu s|Button{
+	skinClass: ClassReference("Skins.ButtonGreySkin");
+}
+
+Menus|LeftMenu s|Button s|Label{
+	fontSize: 13px;
+	paddingRight: 5px;
+}
+
+#openMenuBtn{
+	skinClass: ClassReference("Skins.ButtonGreySkin");
+}
+
+
+
+
+/*-------------------- Content Pages -----------------------------*/
+ContentPages|IntroCP s|Label, ContentPages|FinalTestCP s|Label, 
+ContentPages|VocabularyCP s|Label, ContentPages|StrongCP s|Label,
+ ContentPages|LibraryCP s|Label{
+	fontSize: 14px;
+	fontWeight: bold;
+}
+
+ContentPages|IntroCP s|RichEditableText, ContentPages|FinalTestCP s|RichEditableText, 
+ContentPages|VocabularyCP s|RichEditableText, ContentPages|StrongCP s|RichEditableText,
+ContentPages|StatisticsCP s|RichEditableText, ContentPages|LibraryCP s|RichEditableText
+{
+	fontSize: 14px;
+	textAlign: justify;
+	paragraphSpaceAfter: 7;
+	paragraphSpaceBefore: 7;
+}
+
+
+/*-------------------- Turing Machine -----------------------------*/
+TuringMachine|TMview s|Label{
+	fontSize: 14px;
+	fontWeight: normal;
+	fontStyle: italic;
+}
+TuringMachine|TMview s|RichEditableText{
+	fontSize: 18px;
+	fontWeight: normal;
+	paddingLeft: 5px;
+	paddingTop: 5px;
+	paddingBottom: 5px;
+	paddingRight: 5px;
+}
+
+TuringMachine|TMLineController s|TextInput{
+	textAlign: center;
+	fontSize: 17px;
+	skinClass: ClassReference("Skins.TMLineTextInputSkin");
+}
+#commandsDataGroup s|TextInput{
+	skinClass: ClassReference("Skins.TMCommandTextInputSkin");
+}
+
+TuringMachine|TMHeaderRenderer s|RichText{
+	backgroundColor: #dceeff;
+	fontSize: 12px;
+	fontStyle: normal;
+	textAlign: center;
+}
+
+TuringMachine|TMCommandRenderer s|TextInput{
+	backgroundColor: #eefeff;
+	fontSize: 17px;
+	textAlign: center;
+}
+
+
+
+
+/*--------------------   Other   -----------------------------*/
+
+Components|ResultHeaderRenderer s|RichText{
+	backgroundColor: #dceeff;
+	fontSize: 15px;
+	fontStyle: normal;
+	textAlign: center;
+}
+
+Components|ResultRenderer s|RichText{
+	backgroundColor: #ffffff;
+	fontSize: 13px;
+	textAlign: center;
+
+}
+Components|ResultRenderer s|RichEditableText{
+	backgroundColor: #ffffff;
+	fontSize: 12px;
+	textAlign: center;
+}
+Components|ResultRenderer s|Button{
+    skinClass: ClassReference("Skins.ButtonBlueSkin");
+}
+
+s|VScrollBar{
+	skinClass: ClassReference("Skins.VscrollbarSkin");	
+}
+
+ContentPages|StatisticsCP s|Label{
+    fontSize: 12px;
+    fontWeight: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

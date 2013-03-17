@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="ELearn">
     <configurations>
-      <configuration name="ELearn" main-class="ELearn" output-file="ELearn.swf" output-folder="$MODULE_DIR$/bin-debug" wrapper-template-path="$MODULE_DIR$/html-template">
+      <configuration name="ELearn" main-class="ELearn" output-file="ELearn.swf" output-folder="$MODULE_DIR$/bin-debug" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="11.4">
           <entries>
             <entry library-id="a2d095f1-9b5d-46c9-8682-60e51313139f">
